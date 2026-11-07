@@ -22,9 +22,10 @@ import csv
 import datetime as dt
 import json
 import sys
+import urllib.error
+import urllib.request
 from collections import defaultdict
-
-import anthropic
+from pathlib import Path
 
 from common import DATA_DIR, write_json
 
@@ -409,7 +410,120 @@ def log_views(summary: dict, baseline: dict) -> int:
     return added
 
 
+def finalize(summary: dict, sources: dict, baseline: dict, model: str) -> None:
+    """Shared tail of both modes: guardrails, scoring log, write summary.json."""
+    baseline_ids = {s["id"] for s in baseline["series"]}
+    dropped = validate(summary, set(sources), baseline_ids)
+    logged = log_views(summary, baseline)
+    used = cited_ids(summary)
+    summary.update({
+        "generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
+        "model": model,
+        "dropped_uncited_items": dropped,
+        "sources": {sid: s for sid, s in sources.items() if sid in used},
+    })
+    summary.pop("web_sources", None)
+    write_json(OUT, summary)
+    print(f"summary: {len(summary['sources'])} sources cited, {dropped} uncited/invalid items dropped, "
+          f"{logged} Claude calls logged")
+
+
+# ---------------------------------------------------------------- agent mode (no API key)
+# A Claude Code session (or scheduled routine) does the research and writing with its own
+# tools, using the brief from --emit, then hands the draft back through --ingest, which
+# applies the same guardrails as the API path. See pipeline/SUMMARY_AGENT.md.
+
+def emit(path: str) -> None:
+    facts, sources = digest()
+    baseline = load_baseline() or {"series": []}
+    brief = {
+        "today": dt.date.today().isoformat(),
+        "research_brief": RESEARCH_PROMPT.format(today=dt.date.today().isoformat()),
+        "writing_rules": WRITE_SYSTEM,
+        "draft_format": (
+            "Write one JSON object matching output_schema, plus a top-level 'web_sources' list: "
+            "[{\"id\": \"web:1\", \"title\": ..., \"url\": ..., \"page_age\": \"date if known\"}]. "
+            "Cite data with the data:* ids in source_table and web pages with your web:N ids. "
+            "Only list pages you actually opened or saw in search results."),
+        "source_table": sources,
+        "data_digest": facts,
+        "output_schema": build_schema([s["id"] for s in baseline["series"]]),
+    }
+    write_json(Path(path), brief)
+    print(f"brief written to {path}")
+
+
+def check_schema(value, schema: dict, where: str = "$") -> list[str]:
+    """Minimal JSON-schema check (types, enums, required, no extra keys) for agent drafts."""
+    errs = []
+    t = schema.get("type")
+    if t == "object":
+        if not isinstance(value, dict):
+            return [f"{where}: expected object"]
+        props = schema.get("properties", {})
+        errs += [f"{where}.{k}: missing" for k in schema.get("required", []) if k not in value]
+        for k, v in value.items():
+            if k in props:
+                errs += check_schema(v, props[k], f"{where}.{k}")
+            elif schema.get("additionalProperties") is False and not (where == "$" and k == "web_sources"):
+                errs.append(f"{where}.{k}: unexpected key")
+    elif t == "array":
+        if not isinstance(value, list):
+            return [f"{where}: expected array"]
+        for i, item in enumerate(value):
+            errs += check_schema(item, schema.get("items", {}), f"{where}[{i}]")
+    elif t == "string":
+        if not isinstance(value, str):
+            errs.append(f"{where}: expected string")
+        elif "enum" in schema and value not in schema["enum"]:
+            errs.append(f"{where}: {value!r} not in {schema['enum']}")
+    elif t == "number" and (isinstance(value, bool) or not isinstance(value, (int, float))):
+        errs.append(f"{where}: expected number")
+    return errs
+
+
+def url_ok(url: str) -> bool:
+    """The page must exist: https and a non-error response."""
+    if not url.startswith("https://"):
+        return False
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (vmc-growth-tracker source check)"})
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            return resp.status < 400
+    except urllib.error.HTTPError as e:
+        return e.code in (401, 403, 429)  # exists but blocks bots; keep
+    except Exception:  # noqa: BLE001 - DNS failure, timeout, bad URL
+        return False
+
+
+def ingest(path: str, model: str) -> None:
+    draft = json.loads(Path(path).read_text(encoding="utf-8"))
+    baseline = load_baseline() or {"series": []}
+    errs = check_schema(draft, build_schema([s["id"] for s in baseline["series"]]))
+    if errs:
+        raise SystemExit("Draft does not match the schema; summary.json unchanged:\n  " + "\n  ".join(errs[:30]))
+    _, sources = digest()
+    bad = []
+    for w in draft.get("web_sources", []):
+        if not str(w.get("id", "")).startswith("web:"):
+            continue
+        if url_ok(w.get("url", "")):
+            sources[w["id"]] = {"kind": "web", "title": w.get("title") or w["url"], "url": w["url"],
+                                "page_age": w.get("page_age")}
+        else:
+            bad.append(w.get("url"))
+    if bad:
+        print(f"  {len(bad)} web source(s) failed the link check and were removed: {bad}")
+    finalize(draft, sources, baseline, model)
+
+
 def main() -> None:
+    if "--emit" in sys.argv:
+        return emit(sys.argv[sys.argv.index("--emit") + 1])
+    if "--ingest" in sys.argv:
+        model = sys.argv[sys.argv.index("--model") + 1] if "--model" in sys.argv else "Claude (Claude Code)"
+        return ingest(sys.argv[sys.argv.index("--ingest") + 1], model)
+
     force = "--force" in sys.argv
     if OUT.exists() and not force:
         prev = json.loads(OUT.read_text(encoding="utf-8"))
@@ -418,6 +532,8 @@ def main() -> None:
             print(f"summary: generated {age.days} days ago, skipping (use --force)")
             return
 
+    import anthropic  # only the API path needs the SDK
+
     client = anthropic.Anthropic()
     facts, sources = digest()
     research_text, found = research(client)
@@ -425,20 +541,8 @@ def main() -> None:
         sources[f"web:{i}"] = {"kind": "web", "title": meta["title"] or url, "url": url,
                                "page_age": meta.get("page_age")}
     baseline = load_baseline() or {"series": []}
-    baseline_ids = [s["id"] for s in baseline["series"]]
-    summary = write(client, facts, research_text, sources, baseline_ids)
-    dropped = validate(summary, set(sources), set(baseline_ids))
-    logged = log_views(summary, baseline)
-    used = cited_ids(summary)
-    summary.update({
-        "generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
-        "model": MODEL,
-        "dropped_uncited_items": dropped,
-        "sources": {sid: s for sid, s in sources.items() if sid in used},
-    })
-    write_json(OUT, summary)
-    print(f"summary: {len(summary['sources'])} sources cited, {dropped} uncited/invalid items dropped, "
-          f"{logged} Claude calls logged")
+    summary = write(client, facts, research_text, sources, [s["id"] for s in baseline["series"]])
+    finalize(summary, sources, baseline, MODEL)
 
 
 if __name__ == "__main__":

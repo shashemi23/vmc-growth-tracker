@@ -1,0 +1,161 @@
+year,geography,bedroom,vacancy_rate,vacancy_rate_quality,avg_rent,avg_rent_quality
+2010,Richmond Hill/Vaughan/King,1 Bedroom,2.4,a,971,a
+2010,Richmond Hill/Vaughan/King,2 Bedroom,1.1,a,1144,a
+2010,Richmond Hill/Vaughan/King,3 Bedroom +,1.3,d,1405,a
+2010,Richmond Hill/Vaughan/King,Studio,6.2,b,829,a
+2010,Richmond Hill/Vaughan/King,Total,1.9,a,1071,a
+2010,Toronto CMA,1 Bedroom,2.4,a,949,a
+2010,Toronto CMA,2 Bedroom,1.9,a,1123,a
+2010,Toronto CMA,3 Bedroom +,1.7,a,1329,a
+2010,Toronto CMA,Studio,2.3,a,777,a
+2010,Toronto CMA,Total,2.1,a,1048,a
+2011,Richmond Hill/Vaughan/King,1 Bedroom,1.0,a,1014,a
+2011,Richmond Hill/Vaughan/King,2 Bedroom,0.5,a,1208,a
+2011,Richmond Hill/Vaughan/King,3 Bedroom +,,,1476,a
+2011,Richmond Hill/Vaughan/King,Studio,2.7,c,842,a
+2011,Richmond Hill/Vaughan/King,Total,0.9,a,1132,a
+2011,Toronto CMA,1 Bedroom,1.5,a,977,a
+2011,Toronto CMA,2 Bedroom,1.3,a,1148,a
+2011,Toronto CMA,3 Bedroom +,1.7,a,1356,a
+2011,Toronto CMA,Studio,1.6,a,819,a
+2011,Toronto CMA,Total,1.4,a,1073,a
+2012,Richmond Hill/Vaughan/King,1 Bedroom,2.4,c,1019,a
+2012,Richmond Hill/Vaughan/King,2 Bedroom,1.8,b,1236,a
+2012,Richmond Hill/Vaughan/King,3 Bedroom +,0.0,d,1453,a
+2012,Richmond Hill/Vaughan/King,Studio,1.3,a,827,a
+2012,Richmond Hill/Vaughan/King,Total,1.9,b,1145,a
+2012,Toronto CMA,1 Bedroom,1.8,a,1007,a
+2012,Toronto CMA,2 Bedroom,1.7,a,1183,a
+2012,Toronto CMA,3 Bedroom +,1.8,a,1411,a
+2012,Toronto CMA,Studio,1.6,a,837,a
+2012,Toronto CMA,Total,1.7,a,1108,a
+2013,Richmond Hill/Vaughan/King,1 Bedroom,0.6,a,1046,a
+2013,Richmond Hill/Vaughan/King,2 Bedroom,1.2,a,1235,a
+2013,Richmond Hill/Vaughan/King,3 Bedroom +,,,1463,a
+2013,Richmond Hill/Vaughan/King,Studio,9.9,c,870,a
+2013,Richmond Hill/Vaughan/King,Total,1.6,b,1160,a
+2013,Toronto CMA,1 Bedroom,1.8,a,1032,a
+2013,Toronto CMA,2 Bedroom,1.5,a,1211,a
+2013,Toronto CMA,3 Bedroom +,1.9,a,1461,a
+2013,Toronto CMA,Studio,2.0,a,873,a
+2013,Toronto CMA,Total,1.7,a,1138,a
+2014,Richmond Hill/Vaughan/King,1 Bedroom,1.2,a,1081,a
+2014,Richmond Hill/Vaughan/King,2 Bedroom,1.1,a,1297,a
+2014,Richmond Hill/Vaughan/King,3 Bedroom +,1.3,d,1521,a
+2014,Richmond Hill/Vaughan/King,Studio,1.1,a,877,a
+2014,Richmond Hill/Vaughan/King,Total,1.1,a,1207,a
+2014,Toronto CMA,1 Bedroom,1.7,a,1067,a
+2014,Toronto CMA,2 Bedroom,1.5,a,1251,a
+2014,Toronto CMA,3 Bedroom +,1.5,a,1466,a
+2014,Toronto CMA,Studio,1.6,a,896,a
+2014,Toronto CMA,Total,1.6,a,1170,a
+2015,Richmond Hill/Vaughan/King,1 Bedroom,1.5,c,1148,a
+2015,Richmond Hill/Vaughan/King,2 Bedroom,1.1,a,1343,a
+2015,Richmond Hill/Vaughan/King,3 Bedroom +,,,1538,a
+2015,Richmond Hill/Vaughan/King,Studio,1.1,a,900,a
+2015,Richmond Hill/Vaughan/King,Total,1.6,b,1262,a
+2015,Toronto CMA,1 Bedroom,1.7,a,1103,a
+2015,Toronto CMA,2 Bedroom,1.5,a,1286,a
+2015,Toronto CMA,3 Bedroom +,1.5,a,1516,a
+2015,Toronto CMA,Studio,1.9,a,937,a
+2015,Toronto CMA,Total,1.6,a,1208,a
+2016,Richmond Hill/Vaughan/King,1 Bedroom,0.6,a,1134,a
+2016,Richmond Hill/Vaughan/King,2 Bedroom,1.8,c,1322,a
+2016,Richmond Hill/Vaughan/King,3 Bedroom +,0.0,d,1488,a
+2016,Richmond Hill/Vaughan/King,Studio,0.0,d,909,b
+2016,Richmond Hill/Vaughan/King,Total,1.1,a,1243,a
+2016,Toronto CMA,1 Bedroom,1.3,a,1132,a
+2016,Toronto CMA,2 Bedroom,1.3,a,1326,a
+2016,Toronto CMA,3 Bedroom +,1.8,a,1525,a
+2016,Toronto CMA,Studio,1.4,a,957,a
+2016,Toronto CMA,Total,1.4,a,1240,a
+2017,Richmond Hill/Vaughan/King,1 Bedroom,0.4,a,1153,a
+2017,Richmond Hill/Vaughan/King,2 Bedroom,1.5,c,1388,a
+2017,Richmond Hill/Vaughan/King,3 Bedroom +,1.2,d,1631,a
+2017,Richmond Hill/Vaughan/King,Studio,2.5,c,939,a
+2017,Richmond Hill/Vaughan/King,Total,1.1,a,1290,a
+2017,Toronto CMA,1 Bedroom,1.1,a,1194,a
+2017,Toronto CMA,2 Bedroom,0.9,a,1403,a
+2017,Toronto CMA,3 Bedroom +,1.1,a,1589,a
+2017,Toronto CMA,Studio,1.2,a,1013,a
+2017,Toronto CMA,Total,1.1,a,1308,a
+2018,Richmond Hill/Vaughan/King,1 Bedroom,1.4,d,1145,a
+2018,Richmond Hill/Vaughan/King,2 Bedroom,1.2,a,1373,a
+2018,Richmond Hill/Vaughan/King,3 Bedroom +,2.8,c,1591,b
+2018,Richmond Hill/Vaughan/King,Studio,,,1020,b
+2018,Richmond Hill/Vaughan/King,Total,1.4,a,1289,a
+2018,Toronto CMA,1 Bedroom,1.2,a,1261,a
+2018,Toronto CMA,2 Bedroom,1.0,a,1468,a
+2018,Toronto CMA,3 Bedroom +,1.0,a,1647,a
+2018,Toronto CMA,Studio,1.6,a,1081,a
+2018,Toronto CMA,Total,1.1,a,1370,a
+2019,Richmond Hill/Vaughan/King,1 Bedroom,2.0,b,1211,a
+2019,Richmond Hill/Vaughan/King,2 Bedroom,0.9,a,1439,a
+2019,Richmond Hill/Vaughan/King,3 Bedroom +,2.1,c,1617,b
+2019,Richmond Hill/Vaughan/King,Studio,0.0,d,1011,b
+2019,Richmond Hill/Vaughan/King,Total,1.4,a,1345,a
+2019,Toronto CMA,1 Bedroom,1.6,a,1361,a
+2019,Toronto CMA,2 Bedroom,1.4,a,1563,a
+2019,Toronto CMA,3 Bedroom +,1.0,a,1730,a
+2019,Toronto CMA,Studio,2.1,a,1142,a
+2019,Toronto CMA,Total,1.5,a,1465,a
+2020,Richmond Hill/Vaughan/King,1 Bedroom,1.7,b,1383,a
+2020,Richmond Hill/Vaughan/King,2 Bedroom,3.2,d,1591,b
+2020,Richmond Hill/Vaughan/King,3 Bedroom +,0.0,d,1842,b
+2020,Richmond Hill/Vaughan/King,Studio,0.0,d,1109,c
+2020,Richmond Hill/Vaughan/King,Total,2.2,b,1500,b
+2020,Toronto CMA,1 Bedroom,4.0,a,1421,a
+2020,Toronto CMA,2 Bedroom,2.7,a,1637,a
+2020,Toronto CMA,3 Bedroom +,2.1,a,1854,a
+2020,Toronto CMA,Studio,5.5,a,1204,a
+2020,Toronto CMA,Total,3.4,a,1536,a
+2021,Richmond Hill/Vaughan/King,1 Bedroom,2.4,c,1341,a
+2021,Richmond Hill/Vaughan/King,2 Bedroom,2.7,b,1538,a
+2021,Richmond Hill/Vaughan/King,3 Bedroom +,,,1960,c
+2021,Richmond Hill/Vaughan/King,Studio,,,1180,c
+2021,Richmond Hill/Vaughan/King,Total,2.6,c,1473,b
+2021,Toronto CMA,1 Bedroom,5.8,a,1439,a
+2021,Toronto CMA,2 Bedroom,3.3,a,1680,a
+2021,Toronto CMA,3 Bedroom +,2.2,a,1918,a
+2021,Toronto CMA,Studio,7.8,b,1217,a
+2021,Toronto CMA,Total,4.5,a,1570,a
+2022,Richmond Hill/Vaughan/King,1 Bedroom,0.9,a,1348,a
+2022,Richmond Hill/Vaughan/King,2 Bedroom,1.0,a,1580,b
+2022,Richmond Hill/Vaughan/King,3 Bedroom +,0.0,d,2031,b
+2022,Richmond Hill/Vaughan/King,Studio,,,1315,b
+2022,Richmond Hill/Vaughan/King,Total,1.0,a,1522,b
+2022,Toronto CMA,1 Bedroom,1.9,a,1527,a
+2022,Toronto CMA,2 Bedroom,1.3,a,1779,a
+2022,Toronto CMA,3 Bedroom +,1.1,a,2018,a
+2022,Toronto CMA,Studio,2.6,a,1306,a
+2022,Toronto CMA,Total,1.6,a,1665,a
+2023,Richmond Hill/Vaughan/King,1 Bedroom,1.5,c,1479,b
+2023,Richmond Hill/Vaughan/King,2 Bedroom,1.0,a,1882,b
+2023,Richmond Hill/Vaughan/King,3 Bedroom +,0.0,d,2019,b
+2023,Richmond Hill/Vaughan/King,Studio,0.0,d,1233,d
+2023,Richmond Hill/Vaughan/King,Total,1.1,a,1719,b
+2023,Toronto CMA,1 Bedroom,1.7,a,1691,a
+2023,Toronto CMA,2 Bedroom,1.2,a,1958,a
+2023,Toronto CMA,3 Bedroom +,1.2,a,2168,a
+2023,Toronto CMA,Studio,1.7,a,1414,a
+2023,Toronto CMA,Total,1.4,a,1830,a
+2024,Richmond Hill/Vaughan/King,1 Bedroom,2.6,b,1533,a
+2024,Richmond Hill/Vaughan/King,2 Bedroom,2.5,c,1929,a
+2024,Richmond Hill/Vaughan/King,3 Bedroom +,1.1,d,2233,b
+2024,Richmond Hill/Vaughan/King,Studio,,,1199,c
+2024,Richmond Hill/Vaughan/King,Total,2.4,b,1762,a
+2024,Toronto CMA,1 Bedroom,3.0,a,1715,a
+2024,Toronto CMA,2 Bedroom,1.9,a,1972,a
+2024,Toronto CMA,3 Bedroom +,1.2,a,2185,a
+2024,Toronto CMA,Studio,4.4,b,1448,a
+2024,Toronto CMA,Total,2.5,a,1852,a
+2025,Richmond Hill/Vaughan/King,1 Bedroom,3.1,d,1583,a
+2025,Richmond Hill/Vaughan/King,2 Bedroom,2.1,b,1827,b
+2025,Richmond Hill/Vaughan/King,3 Bedroom +,,,2332,c
+2025,Richmond Hill/Vaughan/King,Studio,0.0,d,1328,c
+2025,Richmond Hill/Vaughan/King,Total,2.4,b,1726,b
+2025,Toronto CMA,1 Bedroom,3.6,a,1761,a
+2025,Toronto CMA,2 Bedroom,2.5,a,2045,a
+2025,Toronto CMA,3 Bedroom +,1.8,a,2294,a
+2025,Toronto CMA,Studio,4.2,a,1491,a
+2025,Toronto CMA,Total,3.0,a,1917,a

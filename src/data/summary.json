@@ -4,8 +4,7 @@
   "data:resale",
   "data:vaughan_supply",
   "web:1",
-  "web:6",
-  "web:8"
+  "web:6"
  ],
  "status": [
   {
@@ -43,8 +42,7 @@
    "explanation": "New condo sales across the GTA and Hamilton doubled in mid-2026, helped by large bulk purchases. But the Bank of Canada raised rates in October and Ontario's unemployment rate reached 7.0%.",
    "cite": [
     "web:4",
-    "web:1",
-    "web:11"
+    "web:1"
    ]
   },
   {
@@ -54,9 +52,7 @@
    "explanation": "Vaughan cut its development charges to zero for eligible projects and Ontario offers a full HST rebate on new homes up to $1 million. Higher rates and job losses push the other way.",
    "cite": [
     "web:6",
-    "web:8",
-    "web:1",
-    "web:11"
+    "web:1"
    ]
   }
  ],
@@ -69,12 +65,6 @@
      "text": "A typical Vaughan condo apartment is valued at $504,900, down 6.5% in a year and about 42% below its 2022 peak of $864,400.",
      "cite": [
       "data:resale"
-     ]
-    },
-    {
-     "text": "Ontario rebates the full 13% HST on new homes up to $1 million (up to $130,000) if you live in the home, and you don't have to be a first-time buyer.",
-     "cite": [
-      "web:8"
      ]
     },
     {
@@ -180,12 +170,6 @@
      "cite": [
       "data:resale"
      ]
-    },
-    {
-     "text": "New condos can now come with an HST rebate of up to $130,000 for buyers who live in them, which makes new units more competitive with resale.",
-     "cite": [
-      "web:8"
-     ]
     }
    ],
    "watch": [
@@ -244,12 +228,6 @@
      "cite": [
       "data:resale"
      ]
-    },
-    {
-     "text": "A new condo you live in can qualify for Ontario's full HST rebate if it costs up to $1 million.",
-     "cite": [
-      "web:8"
-     ]
     }
    ],
    "watch": [
@@ -268,8 +246,7 @@
      "driver": "Bank of Canada policy rate",
      "assumption": "Stays between 2.5% and 3.0% through 2027",
      "cite": [
-      "web:1",
-      "web:2"
+      "web:1"
      ]
     },
     {
@@ -285,13 +262,6 @@
      "cite": [
       "web:6"
      ]
-    },
-    {
-     "driver": "Ontario jobs",
-     "assumption": "Unemployment stays around 7%",
-     "cite": [
-      "web:11"
-     ]
     }
    ],
    "drivers": [
@@ -299,8 +269,7 @@
      "text": "Zero city development charges and the new-home HST rebate lower the cost of building and buying new.",
      "direction": "helps growth",
      "cite": [
-      "web:6",
-      "web:8"
+      "web:6"
      ]
     },
     {
@@ -329,8 +298,7 @@
      "driver": "Bank of Canada policy rate",
      "assumption": "No further hikes, and back to 2.25% by the end of 2027",
      "cite": [
-      "web:1",
-      "web:2"
+      "web:1"
      ]
     },
     {
@@ -339,13 +307,6 @@
      "cite": [
       "web:6",
       "data:devapps"
-     ]
-    },
-    {
-     "driver": "Ontario jobs",
-     "assumption": "Unemployment falls below 6.5%",
-     "cite": [
-      "web:11"
      ]
     }
    ],
@@ -373,20 +334,6 @@
    "summary": "More rate hikes and job losses, plus fewer newcomers, push prices and rents lower and keep new construction near its lows.",
    "assumptions": [
     {
-     "driver": "Bank of Canada policy rate",
-     "assumption": "Rises to 3.0% or higher by mid-2027",
-     "cite": [
-      "web:2"
-     ]
-    },
-    {
-     "driver": "Ontario jobs",
-     "assumption": "Unemployment rises above 7.5%",
-     "cite": [
-      "web:11"
-     ]
-    },
-    {
      "driver": "Population",
      "assumption": "Temporary residents fall to 5% of the population by the end of 2027 as planned, reducing rental demand",
      "cite": [
@@ -400,20 +347,6 @@
      "direction": "slows growth",
      "cite": [
       "web:1"
-     ]
-    },
-    {
-     "text": "Canada lost 68,000 jobs in September 2026.",
-     "direction": "slows growth",
-     "cite": [
-      "web:11"
-     ]
-    },
-    {
-     "text": "Very few new condo projects launched in early 2026, so fewer towers can start later.",
-     "direction": "slows growth",
-     "cite": [
-      "web:12"
      ]
     }
    ]
@@ -429,18 +362,6 @@
    "cite": [
     "data:resale",
     "web:1"
-   ]
-  },
-  {
-   "series_id": "hpi_composite_h12",
-   "view": "in line with baseline",
-   "expected_low": 1020000,
-   "expected_high": 1110000,
-   "reason": "Weak jobs and possible further rate hikes weigh on prices. Cheaper new homes (HST rebate) compete with resale. Nothing strong enough to move far from the baseline.",
-   "cite": [
-    "web:2",
-    "web:11",
-    "web:8"
    ]
   },
   {
@@ -462,7 +383,6 @@
    "reason": "Plans to cut temporary residents may reduce rental demand, and new condos with HST rebates compete with resale units.",
    "cite": [
     "web:3",
-    "web:8",
     "data:resale"
    ]
   },
@@ -473,9 +393,7 @@
    "expected_high": 2600,
    "reason": "Zero city development charges and the HST rebate encourage starts, but projects need pre-sales and new launches were very low in early 2026.",
    "cite": [
-    "web:6",
-    "web:8",
-    "web:12"
+    "web:6"
    ]
   },
   {
@@ -486,7 +404,6 @@
    "reason": "Same forces as total starts. One or two towers starting or not can swing the total a lot.",
    "cite": [
     "web:6",
-    "web:12",
     "data:baseline"
    ]
   },
@@ -524,16 +441,6 @@
    ]
   },
   {
-   "date": "2026-12-09",
-   "level": "national",
-   "title": "Next Bank of Canada rate decision",
-   "impact": "Markets are split on whether another hike comes in December or January.",
-   "direction": "mixed",
-   "cite": [
-    "web:2"
-   ]
-  },
-  {
    "date": "2026-11-05",
    "level": "national",
    "title": "2027-2029 immigration plan keeps targets flat",
@@ -541,16 +448,6 @@
    "direction": "mixed",
    "cite": [
     "web:3"
-   ]
-  },
-  {
-   "date": "2026-10-09",
-   "level": "national",
-   "title": "Canada loses 68,000 jobs in September",
-   "impact": "Ontario's unemployment rate reached 7.0%, the highest among large provinces. Job worries keep buyers cautious.",
-   "direction": "slows growth",
-   "cite": [
-    "web:11"
    ]
   },
   {
@@ -564,16 +461,6 @@
    ]
   },
   {
-   "date": "2026-06-02",
-   "level": "provincial",
-   "title": "Ontario's Bill 98 becomes law",
-   "impact": "Aims to speed up planning approvals and lower building costs.",
-   "direction": "helps growth",
-   "cite": [
-    "web:9"
-   ]
-  },
-  {
    "date": "2026-04-28",
    "level": "local",
    "title": "Vaughan cuts its development charges to zero",
@@ -582,27 +469,9 @@
    "cite": [
     "web:6"
    ]
-  },
-  {
-   "date": "2026-03-25",
-   "level": "provincial",
-   "title": "Full HST rebate on new homes up to $1 million",
-   "impact": "Up to $130,000 back for people buying a new home to live in, which helps new condo sales.",
-   "direction": "helps growth",
-   "cite": [
-    "web:8"
-   ]
   }
  ],
  "watch_list": [
-  {
-   "signal": "Bank of Canada rate",
-   "threshold": "Another hike on December 9, 2026 or in January",
-   "why": "Each increase makes mortgages and investor loans more expensive.",
-   "cite": [
-    "web:2"
-   ]
-  },
   {
    "signal": "Typical condo apartment value",
    "threshold": "Two months in a row of increases",
@@ -635,19 +504,11 @@
    "cite": [
     "data:rental"
    ]
-  },
-  {
-   "signal": "Ontario unemployment rate",
-   "threshold": "Above 7.5%",
-   "why": "Rising job losses would weaken demand for homes.",
-   "cite": [
-    "web:11"
-   ]
   }
  ],
- "generated": "2026-11-07T19:13+00:00",
+ "generated": "2026-11-07T20:22+00:00",
  "model": "Claude Opus 5.5 (Claude Code)",
- "dropped_uncited_items": 1,
+ "dropped_uncited_items": 17,
  "sources": {
   "data:devapps": {
    "kind": "data",
@@ -685,12 +546,6 @@
    "url": "https://www.bankofcanada.ca/2026/10/fad-press-release-2026-10-28/",
    "page_age": "2026-10-28"
   },
-  "web:2": {
-   "kind": "web",
-   "title": "Bank of Canada delivers 1st hike in three years (Advisor.ca)",
-   "url": "https://www.advisor.ca/economy/policy/bank-of-canada-delivers-1st-hike-in-three-years/",
-   "page_age": "2026-10-28"
-  },
   "web:3": {
    "kind": "web",
    "title": "Ottawa to shift more temporary residents to permanent status as broad levels flatten (CTV News)",
@@ -709,35 +564,11 @@
    "url": "https://www.vaughan.ca/news/vaughan-reduces-development-charges-zero-accelerate-housing-construction",
    "page_age": "2026-04"
   },
-  "web:8": {
-   "kind": "web",
-   "title": "Ontario's new HST rebate: key details (Osler)",
-   "url": "https://www.osler.com/en/insights/updates/ontarios-new-hst-rebate-key-details/",
-   "page_age": "2026-03"
-  },
-  "web:9": {
-   "kind": "web",
-   "title": "Bill 98 receives Royal Assent (Gowling WLG)",
-   "url": "https://gowlingwlg.com/en/insights-resources/articles/2026/bill-98-receives-royal-assent",
-   "page_age": "2026-06"
-  },
   "web:10": {
    "kind": "web",
    "title": "Average asking rents fall 3.2% in October but prices rising in Toronto, Vancouver (BNN Bloomberg)",
    "url": "https://www.bnnbloomberg.ca/business/real-estate/2026/11/05/average-asking-rents-fall-32-in-october-but-prices-rising-in-toronto-vancouver/",
    "page_age": "2026-11-05"
-  },
-  "web:11": {
-   "kind": "web",
-   "title": "Canada shed 68,000 jobs in September, Statistics Canada reports (The Hub)",
-   "url": "https://thehub.ca/2026/10/09/canada-shed-68000-jobs-in-september-statistics-canada-reports/",
-   "page_age": "2026-10-09"
-  },
-  "web:12": {
-   "kind": "web",
-   "title": "No new GTHA condo projects launched in Q1 (Connect CRE)",
-   "url": "https://www.connectcre.ca/stories/no-new-gtha-condo-projects-launched-in-q1/",
-   "page_age": "2026-04"
   }
  }
 }

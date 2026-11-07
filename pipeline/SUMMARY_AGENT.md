@@ -15,9 +15,9 @@ The script applies the same guardrails as the API path.
    ```sh
    python pipeline/generate_summary.py --emit /tmp/brief.json
    ```
-3. Read the brief. Do the research in `research_brief` with web search. Prefer primary
-   sources (bankofcanada.ca, canada.ca, ontario.ca, york.ca, vaughan.ca, cmhc-schl.gc.ca,
-   trreb.ca) and established news outlets. Note each page's URL and date.
+3. Read the brief. Do the research in `research_brief` with web search, using ONLY sites
+   on `approved_domains` (from `pipeline/approved_sources.txt`; `*.` means any subdomain).
+   Sources on any other site are rejected at ingest. Note each page's URL and date.
 4. Write `/tmp/draft.json`: one object matching `output_schema`, plus
    `web_sources: [{"id": "web:1", "title", "url", "page_age"}]`.
    - Follow `writing_rules` exactly (plain language, cite everything, no advice).

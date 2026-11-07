@@ -23,6 +23,7 @@ import datetime as dt
 import json
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from collections import defaultdict
 from pathlib import Path
@@ -176,6 +177,30 @@ def load_baseline() -> dict | None:
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
+APPROVED_PATH = Path(__file__).resolve().parent / "approved_sources.txt"
+
+
+def load_approved() -> list[str]:
+    """Domains the summary may cite (pipeline/approved_sources.txt). Empty list = no restriction."""
+    if not APPROVED_PATH.exists():
+        return []
+    lines = (l.split("#", 1)[0].strip().lower() for l in APPROVED_PATH.read_text(encoding="utf-8").splitlines())
+    return [l for l in lines if l]
+
+
+def is_approved(url: str, approved: list[str]) -> bool:
+    if not approved:
+        return True
+    host = (urllib.parse.urlsplit(url).hostname or "").lower()
+    for d in approved:
+        if d.startswith("*."):
+            if host.endswith(d[1:]):  # ".example.com"
+                return True
+        elif host == d:
+            return True
+    return False
+
+
 # ---------------------------------------------------------------- Claude calls
 
 def check(resp) -> None:
@@ -211,9 +236,14 @@ and the URL you got it from. Only report what the sources say."""
 
 def research(client: anthropic.Anthropic) -> tuple[str, dict]:
     messages = [{"role": "user", "content": RESEARCH_PROMPT.format(today=dt.date.today().isoformat())}]
-    tools = [{"type": "web_search_20260209", "name": "web_search", "max_uses": 12,
-              "user_location": {"type": "approximate", "city": "Vaughan",
-                                "region": "Ontario", "country": "CA"}}]
+    tool = {"type": "web_search_20260209", "name": "web_search", "max_uses": 12,
+            "user_location": {"type": "approximate", "city": "Vaughan",
+                              "region": "Ontario", "country": "CA"}}
+    approved = load_approved()
+    if approved:
+        # web_search matches subdomains itself, so "*.example.com" becomes "example.com".
+        tool["allowed_domains"] = sorted({d.removeprefix("*.") for d in approved})
+    tools = [tool]
     found: dict[str, dict] = {}
     text_parts: list[str] = []
     for _ in range(5):
@@ -440,11 +470,13 @@ def emit(path: str) -> None:
         "today": dt.date.today().isoformat(),
         "research_brief": RESEARCH_PROMPT.format(today=dt.date.today().isoformat()),
         "writing_rules": WRITE_SYSTEM,
+        "approved_domains": load_approved(),
         "draft_format": (
             "Write one JSON object matching output_schema, plus a top-level 'web_sources' list: "
             "[{\"id\": \"web:1\", \"title\": ..., \"url\": ..., \"page_age\": \"date if known\"}]. "
             "Cite data with the data:* ids in source_table and web pages with your web:N ids. "
-            "Only list pages you actually opened or saw in search results."),
+            "Only list pages you actually opened or saw in search results. Cite ONLY pages on "
+            "approved_domains ('*.' = any subdomain); sources on other sites are rejected at ingest."),
         "source_table": sources,
         "data_digest": facts,
         "output_schema": build_schema([s["id"] for s in baseline["series"]]),
@@ -503,9 +535,13 @@ def ingest(path: str, model: str) -> None:
     if errs:
         raise SystemExit("Draft does not match the schema; summary.json unchanged:\n  " + "\n  ".join(errs[:30]))
     _, sources = digest()
-    bad = []
+    approved = load_approved()
+    bad, rejected = [], []
     for w in draft.get("web_sources", []):
         if not str(w.get("id", "")).startswith("web:"):
+            continue
+        if not is_approved(w.get("url", ""), approved):
+            rejected.append(w.get("url"))
             continue
         if url_ok(w.get("url", "")):
             sources[w["id"]] = {"kind": "web", "title": w.get("title") or w["url"], "url": w["url"],
@@ -514,7 +550,10 @@ def ingest(path: str, model: str) -> None:
             bad.append(w.get("url"))
     if bad:
         print(f"  {len(bad)} web source(s) failed the link check and were removed: {bad}")
-    total = len([w for w in draft.get("web_sources", []) if str(w.get("id", "")).startswith("web:")])
+    if rejected:
+        print(f"  {len(rejected)} web source(s) are not on pipeline/approved_sources.txt and were rejected: {rejected}")
+    total = len([w for w in draft.get("web_sources", [])
+                 if str(w.get("id", "")).startswith("web:") and is_approved(w.get("url", ""), approved)])
     if total and len(bad) * 2 > total and "--allow-missing-sources" not in sys.argv:
         # Most links failing usually means this machine can't reach the web (e.g. a sandbox
         # network allowlist), not that the sources are bad. Publishing would strip the page
@@ -544,6 +583,8 @@ def main() -> None:
     client = anthropic.Anthropic()
     facts, sources = digest()
     research_text, found = research(client)
+    approved = load_approved()
+    found = {u: m for u, m in found.items() if is_approved(u, approved)}
     for i, (url, meta) in enumerate(found.items(), 1):
         sources[f"web:{i}"] = {"kind": "web", "title": meta["title"] or url, "url": url,
                                "page_age": meta.get("page_age")}

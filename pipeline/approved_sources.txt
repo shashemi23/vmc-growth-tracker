@@ -1,0 +1,36 @@
+# Websites the plain-language summary may cite. Edit this list to approve or remove sites.
+#
+# Format: one domain per line. "example.com" matches only that host;
+# "*.example.com" matches any subdomain (www.example.com, news.example.com).
+# Lines starting with # are ignored.
+#
+# Keep this in sync with the "Allowed domains" list of the cloud environment the
+# weekly routine runs in (claude.ai/code > environment settings > Network access: Custom).
+# A site missing there can't be opened by the link check, so its sources get dropped.
+
+# Government and official data
+bankofcanada.ca
+*.bankofcanada.ca
+canada.ca
+*.canada.ca
+ontario.ca
+*.ontario.ca
+york.ca
+*.york.ca
+vaughan.ca
+*.vaughan.ca
+*.cmhc-schl.gc.ca
+*.statcan.gc.ca
+
+# Real estate industry
+trreb.ca
+*.trreb.ca
+*.urbanation.ca
+
+# News
+*.cbc.ca
+*.ctvnews.ca
+*.cp24.com
+*.bnnbloomberg.ca
+*.theglobeandmail.com
+*.thestar.com

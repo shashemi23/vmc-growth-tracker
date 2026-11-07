@@ -3,7 +3,6 @@
  "headline_cite": [
   "data:resale",
   "data:rates",
-  "web:1",
   "data:vaughan_supply"
  ],
  "status": [
@@ -11,7 +10,7 @@
    "area": "supply",
    "signal": "falling",
    "label": "Fewer new homes under way",
-   "explanation": "Vaughan had 3,144 homes under construction in September, down from 3,588 a year ago and far below the peak of 9,815. Only 1,243 homes have started so far in 2026. Many towers finished in 2025 (6,368 completions). The VMC census tract recorded 673 starts so far this year. Across the GTA, the number of condo projects in the pipeline is down 37% from a year ago.",
+   "explanation": "Vaughan had 3,144 homes under construction in September, down from 3,588 a year ago and far below the peak of 9,815. Only 1,243 homes have started so far in 2026. Many towers finished in 2025 (6,368 completions). The VMC census tract recorded 673 starts so far this year. Across the GTHA, pre-construction and under-construction condo inventory is down 37% from a year earlier.",
    "cite": [
     "data:vaughan_supply",
     "data:tract",
@@ -21,8 +20,8 @@
   {
    "area": "demand",
    "signal": "mixed",
-   "label": "Weak jobs, smaller newcomer targets",
-   "explanation": "Ontario's unemployment rate rose to 7.3% in October. Canada plans to admit up to 150,000 new international students and 220,000 new workers a year in 2027 to 2029, well below earlier levels. Fewer newcomers means less demand for rentals and small condos. In Vaughan, resale activity continues: 263 sales in October, with 4.8 months of inventory.",
+   "label": "Weak jobs, steady resales",
+   "explanation": "Ontario's unemployment rate rose to 7.3% in October, and employment was little changed for a third month. Fewer jobs can mean fewer new buyers and renters. In Vaughan, resale activity continues: 263 sales in October, with 4.8 months of inventory.",
    "cite": [
     "web:6",
     "data:resale"
@@ -41,7 +40,7 @@
    "area": "rents",
    "signal": "steady",
    "label": "Rents flat to slightly lower",
-   "explanation": "Average rent in the Richmond Hill/Vaughan/King zone was $1,726 in 2025, down from $1,762 in 2024. Vacancy was 2.4%. This is a wider zone than the VMC. CMHC expects Toronto-area vacancy to rise in 2026 and average rent growth to slow.",
+   "explanation": "Average rent in the Richmond Hill/Vaughan/King zone was $1,726 in 2025, down from $1,762 in 2024. Vacancy was 2.4%. This is a wider zone than the VMC. CMHC says rental conditions are expected to continue easing.",
    "cite": [
     "data:rental",
     "web:7"
@@ -77,13 +76,7 @@
      ]
     },
     {
-     "text": "Ontario removed the provincial part of the HST on new homes up to $1 million for purchases from April 1, 2026 to March 31, 2027. Check the rules that apply to you.",
-     "cite": [
-      "web:10"
-     ]
-    },
-    {
-     "text": "Buyers of new condos in the GTA often paid well below the asking price, and developers are holding a record number of finished, unsold units.",
+     "text": "Buyers of new condos in the GTHA often paid well below the asking price, and developers hold a record number of finished, unsold units.",
      "cite": [
       "web:5"
      ]
@@ -106,7 +99,7 @@
      ]
     },
     {
-     "text": "CMHC expects Toronto-area vacancy to rise in 2026 and rent growth to slow, but warns that fewer condo completions later could add pressure on rents.",
+     "text": "CMHC says rental conditions are expected to continue easing, but slowing condo completions will place renewed pressure on rents in coming years.",
      "cite": [
       "web:7",
       "web:8"
@@ -178,7 +171,7 @@
      ]
     },
     {
-     "text": "Developers hold a record number of finished, unsold condos in the GTHA, which competes with resale listings.",
+     "text": "Developers hold a record 5,001 finished, unsold condos in the GTHA, which competes with resale listings.",
      "cite": [
       "web:5"
      ]
@@ -201,7 +194,7 @@
      ]
     },
     {
-     "text": "GTHA new condo sales rose in the second quarter, but mostly from finished projects and large bulk purchases. Pre-construction sales fell 80%.",
+     "text": "GTHA new condo sales rose in the second quarter, but included some large bulk sales to investment groups. Pre-construction sales fell 80%.",
      "cite": [
       "web:5"
      ]
@@ -283,17 +276,10 @@
    ],
    "drivers": [
     {
-     "text": "Half-price development charges for three years could make some projects pay off again.",
+     "text": "A deal to cut development charges in half for three years could make some projects pay off again.",
      "direction": "helps growth",
      "cite": [
       "web:4"
-     ]
-    },
-    {
-     "text": "GTHA new condo sales rose in the second quarter after three years of declines.",
-     "direction": "helps growth",
-     "cite": [
-      "web:5"
      ]
     }
    ]
@@ -399,7 +385,7 @@
    "view": "in line with baseline",
    "expected_low": 1030000,
    "expected_high": 1140000,
-   "reason": "Prices are falling about 5% a year, and rates are no longer dropping. The baseline already allows for this.",
+   "reason": "Prices are falling about 5% a year, and the Bank of Canada raised its rate on October 28. The baseline already allows for this.",
    "cite": [
     "data:resale",
     "data:baseline",
@@ -481,7 +467,7 @@
    "view": "in line with baseline",
    "expected_low": 1690,
    "expected_high": 1790,
-   "reason": "CMHC expects slower rent growth and higher vacancy in the Toronto area in 2026, after average rent fell in 2025.",
+   "reason": "CMHC says rental conditions are expected to continue easing, after average rent fell in 2025. Slowing completions could add pressure later.",
    "cite": [
     "data:rental",
     "web:7"
@@ -493,27 +479,17 @@
    "date": "2026-03-30",
    "level": "provincial",
    "title": "Ontario and Ottawa announce $8.8 billion to cut development charges",
-   "impact": "The deal aims to cut city development charges in half for three years. Cities must apply and agree to lower their fees. Whether Vaughan takes part is not confirmed in the sources reviewed. Lower fees could help new towers pay off.",
+   "impact": "The announced deal aims to cut development charges in half for three years. Whether Vaughan takes part is not confirmed in the sources reviewed. Lower fees could help new towers pay off.",
    "direction": "helps growth",
    "cite": [
     "web:4"
    ]
   },
   {
-   "date": "2026-04-01",
-   "level": "provincial",
-   "title": "Ontario HST relief on new homes up to $1 million starts",
-   "impact": "The provincial share of HST is removed for qualifying new homes through March 31, 2027, which can lower the price for some buyers of new condos.",
-   "direction": "helps growth",
-   "cite": [
-    "web:10"
-   ]
-  },
-  {
    "date": "2026-07-20",
    "level": "regional",
    "title": "Urbanation: GTHA new condo sales rise for the first time in three years",
-   "impact": "Sales were 702 units in Q2, but mostly finished projects. Pre-construction sales fell 80% to 50 units, so new towers still struggle to launch.",
+   "impact": "Sales were 702 units in Q2, but included some large bulk sales to investment groups. Pre-construction sales fell 80% to 50 units, so new towers still struggle to launch.",
    "direction": "mixed",
    "cite": [
     "web:5"
@@ -523,7 +499,7 @@
    "date": "2026-10-28",
    "level": "national",
    "title": "Bank of Canada raises its rate to 2.5%",
-   "impact": "The bank raised its policy rate by 0.25 points. It said inflation has been higher than expected and is projected to stay around 3% through much of 2027. That keeps mortgage costs from falling.",
+   "impact": "The bank raised its policy rate by 0.25 points. It said inflation has been higher than anticipated and is projected to stay around 3% through much of 2027. That keeps mortgage costs from falling.",
    "direction": "slows growth",
    "cite": [
     "web:1"
@@ -533,20 +509,10 @@
    "date": "2026-11-06",
    "level": "provincial",
    "title": "Ontario unemployment rises to 7.3%",
-   "impact": "Employment has been flat for three months. Weak jobs can reduce buyer confidence.",
+   "impact": "Employment was little changed for a third month. Weak jobs can reduce buyer confidence.",
    "direction": "slows growth",
    "cite": [
     "web:6"
-   ]
-  },
-  {
-   "date": "2026-11",
-   "level": "local",
-   "title": "Vaughan development charges stack with York Region and school board charges",
-   "impact": "The City collects its own charges plus York Region and school board charges. The VMC also has area-specific charges. These add to the cost of each new condo.",
-   "direction": "slows growth",
-   "cite": [
-    "web:9"
    ]
   }
  ],
@@ -608,9 +574,153 @@
    ]
   }
  ],
- "generated": "2026-11-07T20:48+00:00",
+ "evidence": [
+  {
+   "source": "web:5",
+   "quote": "pre-construction and under-construction inventory falling to 48,710 units in Q2 — down 37% from a year earlier",
+   "used_for": [
+    "status[0]"
+   ]
+  },
+  {
+   "source": "web:6",
+   "quote": "The unemployment rate rose 0.3 percentage points to 7.3% in the month, as more people searched for work.",
+   "used_for": [
+    "status[1]",
+    "personas[2].points[1]",
+    "scenarios[0].assumptions[2]",
+    "scenarios[2].assumptions[1]",
+    "scenarios[2].drivers[0]",
+    "baseline_views[1]",
+    "baseline_views[3]",
+    "events[4]",
+    "watch_list[5]"
+   ]
+  },
+  {
+   "source": "web:6",
+   "quote": "In Ontario, employment was little changed for a third consecutive month in October.",
+   "used_for": [
+    "status[1]",
+    "personas[2].points[1]",
+    "events[4]"
+   ]
+  },
+  {
+   "source": "web:5",
+   "quote": "Pre-construction sales moved in the opposite direction, dropping 80% annually to just 50 units.",
+   "used_for": [
+    "status[4]",
+    "personas[4].points[1]",
+    "events[2]",
+    "scenarios[2].assumptions[2]",
+    "baseline_views[2]",
+    "baseline_views[3]",
+    "baseline_views[4]",
+    "baseline_views[5]",
+    "watch_list[4]"
+   ]
+  },
+  {
+   "source": "web:5",
+   "quote": "rose from 4,826 units in Q1 to a record-high 5,001 units in Q2",
+   "used_for": [
+    "personas[0].points[3]",
+    "personas[3].points[3]",
+    "scenarios[2].assumptions[2]",
+    "baseline_views[2]"
+   ]
+  },
+  {
+   "source": "web:5",
+   "quote": "prices were generally well below asking",
+   "used_for": [
+    "personas[0].points[3]"
+   ]
+  },
+  {
+   "source": "web:5",
+   "quote": "which included some large bulk sales to investment groups",
+   "used_for": [
+    "personas[4].points[1]",
+    "events[2]"
+   ]
+  },
+  {
+   "source": "web:7",
+   "quote": "Conditions are expected to continue easing as new units take longer to be absorbed",
+   "used_for": [
+    "status[3]",
+    "personas[1].points[1]",
+    "scenarios[1].assumptions[2]",
+    "baseline_views[7]"
+   ]
+  },
+  {
+   "source": "web:8",
+   "quote": "slowing condominium completions will reduce an important source of secondary rental supply in coming years.",
+   "used_for": [
+    "personas[1].points[1]"
+   ]
+  },
+  {
+   "source": "web:1",
+   "quote": "Bank of Canada raises the policy rate by 25 basis points to 2½%",
+   "used_for": [
+    "personas[0].points[1]",
+    "personas[2].points[2]",
+    "personas[4].points[2]",
+    "scenarios[0].assumptions[0]",
+    "scenarios[1].drivers[0]",
+    "scenarios[2].assumptions[0]",
+    "scenarios[2].drivers[0]",
+    "baseline_views[0]",
+    "events[3]"
+   ]
+  },
+  {
+   "source": "web:1",
+   "quote": "Inflation in Canada has been higher than anticipated and is projected to remain around 3% through much of 2027.",
+   "used_for": [
+    "scenarios[1].assumptions[0]",
+    "personas[2].points[2]",
+    "events[3]"
+   ]
+  },
+  {
+   "source": "web:4",
+   "quote": "Ontario development charges to be cut in half for 3 years",
+   "used_for": [
+    "scenarios[0].assumptions[1]",
+    "scenarios[0].drivers[0]",
+    "events[0]",
+    "baseline_views[1]",
+    "baseline_views[4]"
+   ]
+  },
+  {
+   "source": "web:4",
+   "quote": "Feds, Ontario invest $8.8 B to cut development charges in half",
+   "used_for": [
+    "events[0]"
+   ]
+  },
+  {
+   "source": "web:11",
+   "quote": "December 9, 2026 Interest Rate Announcement 09:45 (ET)",
+   "used_for": [
+    "watch_list[0]"
+   ]
+  }
+ ],
+ "verification": {
+  "web_citations_checked": 46,
+  "verified": 42,
+  "removed": 4
+ },
+ "generated": "2026-11-07T20:58+00:00",
  "model": "Claude Sonnet 5.5 (scheduled routine)",
- "dropped_uncited_items": 4,
+ "dropped_uncited_items": 3,
  "sources": {
   "data:devapps": {
    "kind": "data",
@@ -682,18 +792,6 @@
    "title": "Fall 2026 Housing Supply Report (CMHC)",
    "url": "https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/market-reports/housing-market/housing-supply-report",
    "page_age": "2026-fall"
-  },
-  "web:9": {
-   "kind": "web",
-   "title": "Development Charges (City of Vaughan)",
-   "url": "https://www.vaughan.ca/business/development-charges",
-   "page_age": ""
-  },
-  "web:10": {
-   "kind": "web",
-   "title": "Expanding Ontario's HST Rebates for New Homes (Ontario Ministry of Finance)",
-   "url": "https://news.ontario.ca/assets/files/20260325/2eefe6f1395d191fdd2d4192e7bc685f.pdf",
-   "page_age": "2026-03-25"
   },
   "web:11": {
    "kind": "web",

@@ -1,0 +1,14 @@
+{
+ "pending": true,
+ "generated": null,
+ "model": null,
+ "headline": "The plain-language summary has not been generated yet. It is written weekly by the data pipeline once an Anthropic API key is configured.",
+ "headline_cite": [],
+ "status": [],
+ "personas": [],
+ "scenarios": [],
+ "events": [],
+ "watch_list": [],
+ "dropped_uncited_items": 0,
+ "sources": {}
+}

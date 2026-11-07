@@ -25,6 +25,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Secrets can't be read in `if:`; expose only whether the key exists.
+      HAS_ANTHROPIC_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -33,12 +36,27 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
+
+      - name: Install Python dependencies
+        if: github.event_name == 'schedule' || inputs.refresh_data
+        run: pip install -r requirements.txt
 
       - name: Fetch data
         if: github.event_name == 'schedule' || inputs.refresh_data
         run: |
           python pipeline/fetch_devapps.py
           python pipeline/fetch_cmhc.py
+          python pipeline/fetch_trreb.py
+          python pipeline/fetch_boc.py
+
+      - name: Generate plain-language summary (Claude)
+        if: (github.event_name == 'schedule' || inputs.refresh_data) && env.HAS_ANTHROPIC_KEY == 'true'
+        # A failed or declined generation keeps last week's summary instead of failing the deploy.
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python pipeline/generate_summary.py
 
       - name: Commit data changes
         if: github.event_name == 'schedule' || inputs.refresh_data

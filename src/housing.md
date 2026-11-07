@@ -171,3 +171,83 @@ const geoColor = {domain: [ZONE, "Toronto CMA"], range: [seriesColor(dark, 0), s
 </div>
 
 <div class="note">CMHC suppresses most rental figures for the City of Vaughan alone, so this uses CMHC's <b>${ZONE}</b> survey zone. Gaps mean CMHC suppressed the value (sample too small). Condo rentals, a large share of the VMC's rental stock, are not part of this survey.</div>
+
+## Resale market (Vaughan)
+
+```js
+const resale = FileAttachment("data/trreb_vaughan_monthly.csv").csv({typed: true});
+const hpi = FileAttachment("data/trreb_vaughan_hpi.csv").csv({typed: true});
+const rates = FileAttachment("data/boc_rates.csv").csv({typed: true});
+```
+
+```js
+// Insert empty months so the line breaks at gaps instead of bridging them.
+const allSales = new Map(resale.filter((d) => d.home_type === "All").map((d) => [+d.month, d]));
+const salesFilled = allSales.size
+  ? d3.utcMonth.range(d3.min(allSales.keys()), d3.utcMonth.offset(d3.max(allSales.keys()), 1))
+      .map((m) => allSales.get(+m) ?? {month: m, sales: NaN, months_inventory: NaN})
+  : [];
+```
+
+<div class="grid grid-cols-2">
+  <div class="card">
+    ${resize((width) => Plot.plot({
+      title: "Benchmark price by home type",
+      subtitle: "MLS Home Price Index: value of a typical home",
+      width,
+      height: 300,
+      x: {label: null},
+      y: {grid: true, label: "Benchmark price ($)", tickFormat: "$~s"},
+      color: {domain: ["Detached", "Townhouse", "Apartment"], range: [0, 1, 3].map((i) => seriesColor(dark, i)), legend: true},
+      marks: [
+        Plot.lineY(hpi.filter((d) => ["Detached", "Townhouse", "Apartment"].includes(d.home_type)), {x: "month", y: "benchmark_price", stroke: "home_type", strokeWidth: 2, tip: {format: {y: "$,.0f"}}})
+      ]
+    }))}
+  </div>
+  <div class="card">
+    ${resize((width) => Plot.plot({
+      title: "Homes sold per month, all types",
+      subtitle: "TRREB Market Watch. Gap: mid-2022 to mid-2025 reports couldn't be read reliably.",
+      width,
+      height: 300,
+      x: {label: null},
+      y: {grid: true, label: "Sales"},
+      marks: [
+        Plot.ruleY([0]),
+        Plot.lineY(salesFilled, {x: "month", y: "sales", stroke: seriesColor(dark, 0), strokeWidth: 1.5, tip: true})
+      ]
+    }))}
+  </div>
+</div>
+
+<div class="grid grid-cols-2">
+  <div class="card">
+    ${resize((width) => Plot.plot({
+      title: "Months of inventory, all types",
+      subtitle: "How long current listings would take to sell at today's pace. Under 3 favours sellers; over 5 favours buyers.",
+      width,
+      height: 280,
+      x: {label: null},
+      y: {grid: true, label: "Months", zero: true},
+      marks: [
+        Plot.lineY(salesFilled, {x: "month", y: "months_inventory", stroke: seriesColor(dark, 0), strokeWidth: 2, tip: true})
+      ]
+    }))}
+  </div>
+  <div class="card">
+    ${resize((width) => Plot.plot({
+      title: "Interest rates",
+      subtitle: "Bank of Canada. Posted 5-year rates are above what most borrowers pay.",
+      width,
+      height: 280,
+      x: {label: null},
+      y: {grid: true, label: "Rate (%)", zero: true},
+      color: {domain: ["policy_rate", "mortgage_5yr_posted"], range: [seriesColor(dark, 0), seriesColor(dark, 1)], legend: true, tickFormat: (d) => (d === "policy_rate" ? "Policy rate" : "5-yr mortgage (posted)")},
+      marks: [
+        Plot.lineY(rates, {x: "month", y: "rate", stroke: "series", strokeWidth: 2, tip: true})
+      ]
+    }))}
+  </div>
+</div>
+
+<div class="note">Resale figures are for all of Vaughan, from TRREB's monthly Market Watch reports. The VMC is mostly condo apartments, so the apartment lines are the closest match.</div>

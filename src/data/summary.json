@@ -556,7 +556,7 @@
    "threshold": "Next decision is December 9, 2026. A second hike would be a negative sign; a pause would mean steady costs.",
    "why": "Mortgage rates drive what buyers can afford.",
    "cite": [
-    "web:1"
+    "web:11"
    ]
   },
   {
@@ -694,6 +694,12 @@
    "title": "Expanding Ontario's HST Rebates for New Homes (Ontario Ministry of Finance)",
    "url": "https://news.ontario.ca/assets/files/20260325/2eefe6f1395d191fdd2d4192e7bc685f.pdf",
    "page_age": "2026-03-25"
+  },
+  "web:11": {
+   "kind": "web",
+   "title": "Upcoming events (Bank of Canada): Interest Rate Announcement, December 9, 2026",
+   "url": "https://www.bankofcanada.ca/press/upcoming-events/",
+   "page_age": "2026-11-07"
   }
  }
 }

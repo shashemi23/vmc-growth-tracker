@@ -555,16 +555,26 @@ def fetch_page(url: str) -> tuple[bool, str | None]:
     if url in _PAGES:
         return _PAGES[url]
     result: tuple[bool, str | None] = (False, None)
+    raw, ctype = None, ""
     if url.startswith("https://"):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (vmc-growth-tracker source check)"})
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with urllib.request.urlopen(req, timeout=60) as resp:
                 if resp.status < 400:
-                    result = (True, page_text(resp.read(8_000_000), resp.headers.get("Content-Type", "")))
+                    raw, ctype = resp.read(8_000_000), resp.headers.get("Content-Type", "")
+                    result = (True, None)
         except urllib.error.HTTPError as e:
             result = (e.code in (401, 403, 429), None)  # exists but blocks bots
-        except Exception:  # noqa: BLE001 - DNS failure, timeout, bad URL, unreadable PDF
-            result = (False, None)
+            print(f"  fetch {url}: HTTP {e.code}")
+        except Exception as e:  # noqa: BLE001 - DNS failure, timeout, bad URL
+            print(f"  fetch {url}: {type(e).__name__}: {e}")
+    if raw is not None:
+        # Kept separate from the download: a page that loads but can't be turned into text
+        # still exists (link check passes); its quotes just can't be verified.
+        try:
+            result = (True, page_text(raw, ctype))
+        except Exception as e:  # noqa: BLE001 - unreadable PDF, missing pdfplumber dependency
+            print(f"  text extraction failed for {url}: {type(e).__name__}: {e}")
     _PAGES[url] = result
     return result
 

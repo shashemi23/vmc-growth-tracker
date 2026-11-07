@@ -20,7 +20,10 @@ from __future__ import annotations
 
 import csv
 import datetime as dt
+import html
+import io
 import json
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -324,6 +327,17 @@ def build_schema(baseline_ids: list[str]) -> dict:
             "threshold": {"type": "string"},
             "why": {"type": "string"},
             "cite": cite})},
+        "evidence": {"type": "array", "description": (
+            "One entry per web source per fact used. A web citation on an item only counts if an "
+            "entry here quotes that page for that item."), "items": obj({
+            "source": {"type": "string", "description": "web:N id"},
+            "quote": {"type": "string", "description": (
+                "Exact sentence or phrase copied from the page (15-400 characters) that states the "
+                "fact, including its key number or date")},
+            "used_for": {"type": "array", "items": {"type": "string"}, "description": (
+                "Paths of the items this quote supports, e.g. headline, status[0], events[2], "
+                "watch_list[1], baseline_views[3], personas[0].points[1], scenarios[2].drivers[0], "
+                "scenarios[1].assumptions[0]")}})},
     })
 
 
@@ -351,7 +365,12 @@ Rules:
   logged and scored against what actually happens.
 - SCENARIOS: give each scenario 2-5 explicit assumptions about outside drivers (interest
   rates, population/immigration, policy, the wider economy) that are concrete enough to
-  check later, each with a citation."""
+  check later, each with a citation.
+- EVIDENCE: every web citation must be backed by an evidence entry: a quote copied exactly
+  from that page which states the specific fact (with its number or date), listing the item
+  paths it supports. Ingest downloads each page and checks the quote is really there; a web
+  citation without a matching quote is removed, and an item left with no sources is dropped.
+  If no page you read states a fact, leave the fact out."""
 
 
 def write(client: anthropic.Anthropic, facts: dict, research_text: str, sources: dict,
@@ -443,6 +462,7 @@ def log_views(summary: dict, baseline: dict) -> int:
 def finalize(summary: dict, sources: dict, baseline: dict, model: str) -> None:
     """Shared tail of both modes: guardrails, scoring log, write summary.json."""
     baseline_ids = {s["id"] for s in baseline["series"]}
+    summary["verification"] = verify_claims(summary, sources)
     dropped = validate(summary, set(sources), baseline_ids)
     logged = log_views(summary, baseline)
     used = cited_ids(summary)
@@ -476,7 +496,9 @@ def emit(path: str) -> None:
             "[{\"id\": \"web:1\", \"title\": ..., \"url\": ..., \"page_age\": \"date if known\"}]. "
             "Cite data with the data:* ids in source_table and web pages with your web:N ids. "
             "Only list pages you actually opened or saw in search results. Cite ONLY pages on "
-            "approved_domains ('*.' = any subdomain); sources on other sites are rejected at ingest."),
+            "approved_domains ('*.' = any subdomain); sources on other sites are rejected at ingest. "
+            "Fill 'evidence' with exact quotes from each page for each item that cites it (see "
+            "writing_rules EVIDENCE); unquoted web citations are removed at ingest."),
         "source_table": sources,
         "data_digest": facts,
         "output_schema": build_schema([s["id"] for s in baseline["series"]]),
@@ -514,18 +536,107 @@ def check_schema(value, schema: dict, where: str = "$") -> list[str]:
     return errs
 
 
+_PAGES: dict[str, tuple[bool, str | None]] = {}
+
+
+def page_text(raw: bytes, content_type: str) -> str:
+    """Plain text of an HTML page or PDF, for quote matching."""
+    if raw[:4] == b"%PDF" or "pdf" in content_type:
+        import pdfplumber
+        with pdfplumber.open(io.BytesIO(raw)) as pdf:
+            return " ".join((pg.extract_text() or "") for pg in pdf.pages[:60])
+    text = raw.decode("utf-8", errors="replace")
+    text = re.sub(r"(?is)<(script|style|noscript)[^>]*>.*?</\1>", " ", text)
+    return re.sub(r"<[^>]+>", " ", text)
+
+
+def fetch_page(url: str) -> tuple[bool, str | None]:
+    """(exists, text). Text is None when the site exists but refuses bots (can't verify quotes)."""
+    if url in _PAGES:
+        return _PAGES[url]
+    result: tuple[bool, str | None] = (False, None)
+    if url.startswith("https://"):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (vmc-growth-tracker source check)"})
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                if resp.status < 400:
+                    result = (True, page_text(resp.read(8_000_000), resp.headers.get("Content-Type", "")))
+        except urllib.error.HTTPError as e:
+            result = (e.code in (401, 403, 429), None)  # exists but blocks bots
+        except Exception:  # noqa: BLE001 - DNS failure, timeout, bad URL, unreadable PDF
+            result = (False, None)
+    _PAGES[url] = result
+    return result
+
+
 def url_ok(url: str) -> bool:
     """The page must exist: https and a non-error response."""
-    if not url.startswith("https://"):
-        return False
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (vmc-growth-tracker source check)"})
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            return resp.status < 400
-    except urllib.error.HTTPError as e:
-        return e.code in (401, 403, 429)  # exists but blocks bots; keep
-    except Exception:  # noqa: BLE001 - DNS failure, timeout, bad URL
-        return False
+    return fetch_page(url)[0]
+
+
+def norm(text: str) -> str:
+    """Normalise for quote matching: entities, quotes, dashes, spaces, case."""
+    text = html.unescape(text)
+    for a, b in (("\u2018", "'"), ("\u2019", "'"), ("\u201c", '"'), ("\u201d", '"'),
+                 ("\u2013", "-"), ("\u2014", "-"), ("\u2212", "-"), ("\xa0", " "), ("\u00ad", "")):
+        text = text.replace(a, b)
+    return re.sub(r"\s+", " ", text).strip().lower()
+
+
+def citable_items(summary: dict):
+    """(path, item, cite_key) for every item that carries citations."""
+    yield "headline", summary, "headline_cite"
+    for key in ("status", "events", "watch_list", "baseline_views"):
+        for i, it in enumerate(summary.get(key, [])):
+            yield f"{key}[{i}]", it, "cite"
+    for i, p in enumerate(summary.get("personas", [])):
+        for j, it in enumerate(p.get("points", [])):
+            yield f"personas[{i}].points[{j}]", it, "cite"
+    for i, sc in enumerate(summary.get("scenarios", [])):
+        for part in ("drivers", "assumptions"):
+            for j, it in enumerate(sc.get(part, [])):
+                yield f"scenarios[{i}].{part}[{j}]", it, "cite"
+
+
+def verify_claims(summary: dict, sources: dict) -> dict:
+    """Keep a web citation on an item only if an evidence quote for that item is on the page.
+
+    Data citations (data:*) are untouched. Runs before validate(), which then drops items
+    left without any source.
+    """
+    verified: dict[str, set] = {}   # path -> web ids whose quote was found on the page
+    kept_evidence, bad_quotes = [], []
+    for ev in summary.get("evidence", []):
+        sid, quote = ev.get("source", ""), norm(ev.get("quote", ""))
+        src = sources.get(sid)
+        if not src or not 15 <= len(quote) <= 400:
+            bad_quotes.append((sid, "missing source or bad length"))
+            continue
+        exists, text = fetch_page(src["url"])
+        if not text or quote not in norm(text):
+            bad_quotes.append((sid, "quote not found on page" if text else "page unreadable"))
+            continue
+        kept_evidence.append(ev)
+        for path in ev.get("used_for", []):
+            verified.setdefault(path, set()).add(sid)
+    checked = removed = 0
+    for path, item, key in citable_items(summary):
+        keep = []
+        for c in item.get(key, []):
+            if not c.startswith("web:"):
+                keep.append(c)
+                continue
+            checked += 1
+            if c in verified.get(path, set()):
+                keep.append(c)
+            else:
+                removed += 1
+        item[key] = keep
+    summary["evidence"] = kept_evidence
+    if bad_quotes:
+        print(f"  {len(bad_quotes)} evidence quote(s) rejected: {bad_quotes[:12]}")
+    print(f"  claim check: {checked - removed} of {checked} web citations verified against their pages")
+    return {"web_citations_checked": checked, "verified": checked - removed, "removed": removed}
 
 
 def ingest(path: str, model: str) -> None:

@@ -24,6 +24,11 @@ The script applies the same guardrails as the API path.
    - Every number must come from `data_digest` or a listed web source.
    - Give a `baseline_views` entry for every baseline series, and 2-5 cited
      `assumptions` per scenario.
+   - Fill `evidence`: for every item that cites a web page, copy the exact sentence or
+     phrase from that page that states the fact (with its number or date) and list the
+     item paths it supports (`status[0]`, `personas[2].points[1]`, `watch_list[0]`, ...).
+     Open the page with WebFetch to copy the quote; search snippets are not enough.
+     Ingest downloads each page and removes any web citation whose quote isn't on it.
 5. Ingest. This checks the schema, opens every web URL, drops claims whose sources
    fail, logs your projections for scoring, and writes `src/data/summary.json`:
    ```sh

@@ -37,7 +37,7 @@ def http(url: str, *, params: dict | None = None, data: dict | None = None,
 def write_csv(path: Path, rows: list[dict], fieldnames: list[str]) -> None:
     rows = sorted(rows, key=lambda r: tuple(str(r.get(f, "")) for f in fieldnames))
     with path.open("w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore", lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
 

@@ -30,9 +30,10 @@ The script applies the same guardrails as the API path.
    python pipeline/generate_summary.py --ingest /tmp/draft.json --model "Claude (Claude Code)"
    ```
    If it reports schema errors, fix the draft and ingest again.
-6. Build to make sure the page renders, then commit and push:
+   If it stops because most web sources are unreachable, the machine's network is
+   blocked: stop without pushing and report which domains failed.
+6. Commit and push (the deploy workflow builds and publishes the site):
    ```sh
-   npm ci && npm run build
    git add src/data/summary.json src/data/forecast_log.csv
    git commit -m "summary: weekly plain-language update $(date -u +%Y-%m-%d)"
    git push

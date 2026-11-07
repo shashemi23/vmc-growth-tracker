@@ -514,6 +514,13 @@ def ingest(path: str, model: str) -> None:
             bad.append(w.get("url"))
     if bad:
         print(f"  {len(bad)} web source(s) failed the link check and were removed: {bad}")
+    total = len([w for w in draft.get("web_sources", []) if str(w.get("id", "")).startswith("web:")])
+    if total and len(bad) * 2 > total and "--allow-missing-sources" not in sys.argv:
+        # Most links failing usually means this machine can't reach the web (e.g. a sandbox
+        # network allowlist), not that the sources are bad. Publishing would strip the page
+        # of its news, so keep last week's summary instead.
+        raise SystemExit(f"{len(bad)} of {total} web sources unreachable; summary.json unchanged. "
+                         "Check network access, or pass --allow-missing-sources to publish anyway.")
     finalize(draft, sources, baseline, model)
 
 

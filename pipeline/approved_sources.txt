@@ -1,36 +1,36 @@
 # Websites the plain-language summary may cite. Edit this list to approve or remove sites.
 #
-# Format: one domain per line. "example.com" matches only that host;
-# "*.example.com" matches any subdomain (www.example.com, news.example.com).
-# Lines starting with # are ignored.
+# Format: one full hostname per line (e.g. www.example.com). Each host must be listed
+# exactly; example.com does not cover www.example.com. Lines starting with # are ignored.
+# ("*.example.com" would match subdomains, but the cloud environment's allowlist
+# doesn't accept wildcards, so full hostnames keep the two lists identical.)
 #
 # Keep this in sync with the "Allowed domains" list of the cloud environment the
 # weekly routine runs in (claude.ai/code > environment settings > Network access: Custom).
-# A site missing there can't be opened by the link check, so its sources get dropped.
+# A host missing there can't be opened by the link check, so its sources get dropped.
 
 # Government and official data
 bankofcanada.ca
-*.bankofcanada.ca
-canada.ca
-*.canada.ca
-ontario.ca
-*.ontario.ca
-york.ca
-*.york.ca
-vaughan.ca
-*.vaughan.ca
-*.cmhc-schl.gc.ca
-*.statcan.gc.ca
+www.bankofcanada.ca
+www.canada.ca
+www.ontario.ca
+news.ontario.ca
+www.york.ca
+www.vaughan.ca
+www.cmhc-schl.gc.ca
+www03.cmhc-schl.gc.ca
+www.statcan.gc.ca
+www150.statcan.gc.ca
 
 # Real estate industry
 trreb.ca
-*.trreb.ca
-*.urbanation.ca
+www.trreb.ca
+www.urbanation.ca
 
 # News
-*.cbc.ca
-*.ctvnews.ca
-*.cp24.com
-*.bnnbloomberg.ca
-*.theglobeandmail.com
-*.thestar.com
+www.cbc.ca
+www.ctvnews.ca
+www.cp24.com
+www.bnnbloomberg.ca
+www.theglobeandmail.com
+www.thestar.com

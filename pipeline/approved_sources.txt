@@ -33,4 +33,5 @@ www.ctvnews.ca
 www.cp24.com
 www.bnnbloomberg.ca
 www.theglobeandmail.com
-www.thestar.com
+# www.thestar.com removed: it blocks Anthropic's search crawler, so searches that
+# include it fail ("not accessible to our user agent").

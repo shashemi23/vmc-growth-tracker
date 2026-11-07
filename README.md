@@ -4,6 +4,8 @@ Dashboard tracking economic growth in the **Vaughan Metropolitan Centre (VMC)**:
 
 **Live dashboard:** https://shashemi23.github.io/vmc-growth-tracker/
 
+**Working on this repo?** Start with [`docs/STATUS.md`](docs/STATUS.md) (current state, open issues), [`docs/DECISIONS.md`](docs/DECISIONS.md) (why things are built this way) and [`CLAUDE.md`](CLAUDE.md).
+
 ## What it tracks
 
 | Page | Data | Source |

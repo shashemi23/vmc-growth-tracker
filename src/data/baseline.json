@@ -1,0 +1,197 @@
+{
+ "generated": "2026-11-07",
+ "series": [
+  {
+   "id": "hpi_composite_h6",
+   "label": "Typical Vaughan home (all types): benchmark price in 6 months",
+   "unit": "$",
+   "source_note": "TRREB MLS Home Price Index",
+   "origin": "2026-10-01",
+   "target": "2027-04-01",
+   "current": 1106600.0,
+   "method": "damped trend",
+   "forecast": 1087732.3,
+   "low": 985218.1,
+   "high": 1196610.0,
+   "interval": 0.8,
+   "backtest": {
+    "no change": {
+     "n": 134,
+     "typical_error_pct": 6.7
+    },
+    "damped trend": {
+     "n": 121,
+     "typical_error_pct": 5.8
+    }
+   }
+  },
+  {
+   "id": "hpi_composite_h12",
+   "label": "Typical Vaughan home (all types): benchmark price in 12 months",
+   "unit": "$",
+   "source_note": "TRREB MLS Home Price Index",
+   "origin": "2026-10-01",
+   "target": "2027-10-01",
+   "current": 1106600.0,
+   "method": "damped trend",
+   "forecast": 1077836.4,
+   "low": 932087.1,
+   "high": 1229832.7,
+   "interval": 0.8,
+   "backtest": {
+    "no change": {
+     "n": 128,
+     "typical_error_pct": 10.9
+    },
+    "damped trend": {
+     "n": 115,
+     "typical_error_pct": 10.2
+    }
+   }
+  },
+  {
+   "id": "hpi_apartment_h6",
+   "label": "Typical Vaughan condo apartment: benchmark price in 6 months",
+   "unit": "$",
+   "source_note": "TRREB MLS Home Price Index",
+   "origin": "2026-10-01",
+   "target": "2027-04-01",
+   "current": 504900.0,
+   "method": "no change",
+   "forecast": 504900.0,
+   "low": 468496.8,
+   "high": 561467.9,
+   "interval": 0.8,
+   "backtest": {
+    "no change": {
+     "n": 134,
+     "typical_error_pct": 6.3
+    },
+    "damped trend": {
+     "n": 121,
+     "typical_error_pct": 6.5
+    }
+   }
+  },
+  {
+   "id": "hpi_apartment_h12",
+   "label": "Typical Vaughan condo apartment: benchmark price in 12 months",
+   "unit": "$",
+   "source_note": "TRREB MLS Home Price Index",
+   "origin": "2026-10-01",
+   "target": "2027-10-01",
+   "current": 504900.0,
+   "method": "damped trend",
+   "forecast": 484889.8,
+   "low": 399392.0,
+   "high": 559202.2,
+   "interval": 0.8,
+   "backtest": {
+    "no change": {
+     "n": 128,
+     "typical_error_pct": 10.6
+    },
+    "damped trend": {
+     "n": 115,
+     "typical_error_pct": 10.1
+    }
+   }
+  },
+  {
+   "id": "starts_all_next12",
+   "label": "Vaughan housing starts, all types: total over the next 12 months",
+   "unit": "units",
+   "source_note": "CMHC Starts and Completions Survey",
+   "origin": "2026-09-01",
+   "target": "2027-09-01",
+   "current": 1652.0,
+   "method": "no change",
+   "forecast": 1652.0,
+   "low": 806.2,
+   "high": 3779.1,
+   "interval": 0.8,
+   "backtest": {
+    "no change": {
+     "n": 249,
+     "typical_error_pct": 56.1
+    },
+    "damped trend": {
+     "n": 249,
+     "typical_error_pct": 97.5
+    }
+   }
+  },
+  {
+   "id": "starts_apartment_next12",
+   "label": "Vaughan apartment starts: total over the next 12 months",
+   "unit": "units",
+   "source_note": "CMHC Starts and Completions Survey",
+   "origin": "2026-09-01",
+   "target": "2027-09-01",
+   "current": 1508.0,
+   "method": "no change",
+   "forecast": 1508.0,
+   "low": 442.1,
+   "high": 5750.5,
+   "interval": 0.8,
+   "backtest": {
+    "no change": {
+     "n": 241,
+     "typical_error_pct": 166.3
+    },
+    "damped trend": {
+     "n": 239,
+     "typical_error_pct": 394.4
+    }
+   }
+  },
+  {
+   "id": "under_construction_h12",
+   "label": "Vaughan units under construction in 12 months",
+   "unit": "units",
+   "source_note": "CMHC Starts and Completions Survey",
+   "origin": "2026-09-01",
+   "target": "2027-09-01",
+   "current": 3144.0,
+   "method": "no change",
+   "forecast": 3144.0,
+   "low": 2156.6,
+   "high": 5273.5,
+   "interval": 0.8,
+   "backtest": {
+    "no change": {
+     "n": 249,
+     "typical_error_pct": 29.9
+    },
+    "damped trend": {
+     "n": 249,
+     "typical_error_pct": 37.2
+    }
+   }
+  },
+  {
+   "id": "rent_zone_h1",
+   "label": "Average rent next October (Richmond Hill/Vaughan/King zone)",
+   "unit": "$/month",
+   "source_note": "CMHC Rental Market Survey",
+   "origin": "2025",
+   "target": "2026",
+   "current": 1726.0,
+   "method": "no change",
+   "forecast": 1726.0,
+   "low": 1697.0,
+   "high": 1884.0,
+   "interval": 0.8,
+   "backtest": {
+    "no change": {
+     "n": 15,
+     "typical_error_pct": 4.0
+    },
+    "damped trend": {
+     "n": 12,
+     "typical_error_pct": 4.2
+    }
+   }
+  }
+ ]
+}

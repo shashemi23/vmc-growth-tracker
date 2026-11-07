@@ -5,7 +5,7 @@
   "scripts": {
     "build": "observable build",
     "dev": "observable preview",
-    "fetch": "python pipeline/fetch_devapps.py && python pipeline/fetch_cmhc.py && python pipeline/fetch_trreb.py && python pipeline/fetch_boc.py",
+    "fetch": "python pipeline/fetch_devapps.py && python pipeline/fetch_cmhc.py && python pipeline/fetch_trreb.py && python pipeline/fetch_boc.py && python pipeline/baseline.py",
     "summary": "python pipeline/generate_summary.py --force",
     "observable": "observable"
   },

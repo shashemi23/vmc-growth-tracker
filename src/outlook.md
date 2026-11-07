@@ -14,6 +14,8 @@ const summary = FileAttachment("data/summary.json").json();
 const hpi = FileAttachment("data/trreb_vaughan_hpi.csv").csv({typed: true});
 const boc = FileAttachment("data/boc_rates.csv").csv({typed: true});
 const rental = FileAttachment("data/cmhc_rental_zone.csv").csv({typed: true});
+const baseline = FileAttachment("data/baseline.json").json();
+const forecastLog = FileAttachment("data/forecast_log.csv").csv();
 ```
 
 ```js
@@ -141,6 +143,60 @@ if (spec && spec.rows.length) {
 }
 ```
 
+<h2 id="baseline">Baseline projections</h2>
+
+<p class="muted">A simple statistical projection for each measure, before any judgment is applied. Two methods are tested on past data ("no change" and "damped trend": recent growth that gradually fades), and the one that would have been more accurate is used. The shaded range covers 80% of past outcomes for that method, so a wider range means the measure has been harder to predict. Claude then says whether it expects a result above, in line with, or below the baseline, and why.</p>
+
+```js
+const fmtVal = (v, unit) => unit === "$" ? d3.format("$,.0f")(v) : unit === "$/month" ? `${d3.format("$,.0f")(v)}/mo` : `${d3.format(",.0f")(v)} units`;
+const fmtPeriod = (p) => /^\d{4}$/.test(String(p)) ? `Oct ${p}` : d3.utcFormat("%b %Y")(new Date(p));
+const views = new Map((summary.baseline_views ?? []).map((v) => [v.series_id, v]));
+const VIEW = {"above baseline": "▲ Above baseline", "below baseline": "▼ Below baseline", "in line with baseline": "● In line with baseline"};
+display(html`<div class="grid grid-cols-2">${baseline.series.map((b) => {
+  const v = views.get(b.id);
+  const bt = b.backtest[b.method];
+  return html`<div class="card baseline-card">
+    <h3>${b.label}</h3>
+    <div class="muted small">Now (${fmtPeriod(b.origin)}): ${fmtVal(b.current, b.unit)}</div>
+    <div class="proj"><span class="muted">Baseline for ${fmtPeriod(b.target)}:</span> <strong>${fmtVal(b.forecast, b.unit)}</strong></div>
+    <div class="small">80% range: ${fmtVal(b.low, b.unit)} – ${fmtVal(b.high, b.unit)}</div>
+    <div class="muted small">Method: ${b.method}. Typical past error ±${bt.typical_error_pct}% (${bt.n} past tests). Source: ${b.source_note}.</div>
+    ${v ? html`<div class="claude-view"><strong>${VIEW[v.view] ?? v.view}</strong>: ${fmtVal(v.expected_low, b.unit)} – ${fmtVal(v.expected_high, b.unit)}<br><span class="small">${v.reason} ${cites(v.cite)}</span></div>`
+        : html`<div class="muted small claude-view">No adjusted view yet.</div>`}
+  </div>`;
+})}</div>`);
+```
+
+```js
+// Fan chart: benchmark price history with the 12-month baseline range.
+const fanSeries = baseline.series.filter((b) => b.id.startsWith("hpi_") && b.id.endsWith("_h12"));
+const fanName = (id) => id.includes("composite") ? "All home types" : "Condo apartment";
+const hpiStart = d3.utcYear.offset(d3.max(hpi, (x) => x.month), -6);
+const hist = hpi.filter((d) => ["Composite", "Apartment"].includes(d.home_type) && d.month >= hpiStart)
+  .map((d) => ({month: d.month, name: d.home_type === "Composite" ? "All home types" : "Condo apartment", value: d.benchmark_price}));
+const fan = fanSeries.flatMap((b) => [
+  {month: new Date(b.origin), name: fanName(b.id), low: b.current, high: b.current, mid: b.current},
+  {month: new Date(b.target), name: fanName(b.id), low: b.low, high: b.high, mid: b.forecast}
+]);
+const names = ["All home types", "Condo apartment"];
+const fanColor = {domain: names, range: names.map((_, i) => seriesColor(dark, i)), legend: true};
+display(html`<div class="card">${resize((width) => Plot.plot({
+  title: "Typical home value: history and 12-month baseline range",
+  subtitle: "TRREB MLS Home Price Index, Vaughan. Shaded wedge = 80% range; dashed line = baseline.",
+  width,
+  height: 320,
+  x: {label: null},
+  y: {grid: true, label: "Benchmark price ($)", tickFormat: "$~s"},
+  color: fanColor,
+  marks: [
+    Plot.areaY(fan, {x: "month", y1: "low", y2: "high", fill: "name", fillOpacity: 0.18}),
+    Plot.lineY(fan, {x: "month", y: "mid", stroke: "name", strokeDasharray: "4 3", strokeWidth: 1.5}),
+    Plot.lineY(hist, {x: "month", y: "value", stroke: "name", strokeWidth: 2}),
+    Plot.tip(hist, Plot.pointerX({x: "month", y: "value", stroke: "name", format: {x: d3.utcFormat("%b %Y"), y: "$,.0f"}}))
+  ]
+}))}</div>`);
+```
+
 ## Outlook: three possible paths
 
 ```js
@@ -153,6 +209,8 @@ if (summary.scenarios.length) display(html`<div class="grid grid-cols-3">${order
     <h3>${NAMES[s.name]}</h3>
     <div class="muted">${s.likelihood} · ${s.horizon}</div>
     <p>${s.summary}</p>
+    ${(s.assumptions ?? []).length ? html`<div class="assumptions"><strong>Assumes:</strong><ul>${s.assumptions.map((a) => html`<li><b>${a.driver}:</b> ${a.assumption} ${cites(a.cite)}</li>`)}</ul></div>` : ""}
+    <strong>What pushes it:</strong>
     <ul>${s.drivers.map((d) => html`<li><span class="dir">${DIRECTION[d.direction] ?? d.direction}</span> ${d.text} ${cites(d.cite)}</li>`)}</ul>
   </div>`)}</div>`);
 else display(html`<p class="muted">Scenarios appear once the summary is generated.</p>`);
@@ -180,6 +238,44 @@ if (summary.watch_list.length) display(html`<div class="grid grid-cols-2">${summ
 </div>`)}</div>`);
 ```
 
+## How well have we done?
+
+<p class="muted">Forecasts are only useful if you know how often they're right. Every projection on this page is saved, and once its target date arrives it's scored against what actually happened.</p>
+
+```js
+const SOURCE = {baseline: "Baseline", claude: "Claude-adjusted"};
+const labelOf = new Map(baseline.series.map((b) => [b.id, b.label]));
+const isScored = (r) => r.actual !== "" && r.actual != null;
+const scored = forecastLog.filter(isScored);
+const nextDue = d3.min(forecastLog.filter((r) => !isScored(r)), (r) => r.target);
+const bySource = d3.rollups(scored, (v) => ({n: v.length, hit: d3.mean(v, (r) => r.in_band === "True"), mae: d3.mean(v, (r) => Math.abs(+r.error_pct))}), (r) => r.source);
+display(html`<div class="grid grid-cols-2">
+  <div class="card">
+    <h3>Live track record</h3>
+    ${scored.length
+      ? html`<table class="score"><tr><th>Forecaster</th><th>Calls scored</th><th>Inside range</th><th>Typical miss</th></tr>
+          ${bySource.map(([src, st]) => html`<tr><td>${SOURCE[src] ?? src}</td><td>${st.n}</td><td>${d3.format(".0%")(st.hit)}</td><td>±${d3.format(".1f")(st.mae)}%</td></tr>`)}</table>
+          <p class="muted small">A well-calibrated 80% range should contain the actual result about 80% of the time.</p>`
+      : html`<p>No forecasts have reached their target date yet. ${forecastLog.length} forecast(s) logged so far; the first results are due ${nextDue ? fmtPeriod(nextDue) : "soon"}.</p>`}
+  </div>
+  <div class="card">
+    <h3>Backtest: how the baseline methods did on past data</h3>
+    <table class="score"><tr><th>Measure</th><th>No change</th><th>Damped trend</th></tr>
+    ${baseline.series.map((b) => html`<tr><td>${b.label}</td>${["no change", "damped trend"].map((m) => html`<td class=${m === b.method ? "chosen" : ""}>${b.backtest[m] ? `±${b.backtest[m].typical_error_pct}%` : "–"}</td>`)}</tr>`)}
+    </table>
+    <p class="muted small">Typical error = average miss in past tests. <b>Bold</b> = method used now. Starts are hard to predict because a single tower can swing a year.</p>
+  </div>
+</div>`);
+if (scored.length) display(Inputs.table(scored, {
+  columns: ["source", "series_id", "target", "forecast", "low", "high", "actual", "error_pct", "in_band"],
+  header: {source: "By", series_id: "Measure", target: "Target", forecast: "Forecast", low: "Low", high: "High", actual: "Actual", error_pct: "Miss %", in_band: "In range"},
+  format: {source: (d) => SOURCE[d] ?? d, series_id: (d) => labelOf.get(d) ?? d},
+  rows: 12
+}));
+```
+
+<p class="muted small">Method after L.R. Klein &amp; R.M. Young, <i>An Introduction to Econometric Forecasting and Forecasting Models</i> (1980): a mechanical baseline, documented judgmental adjustments, scenarios with explicit assumptions, and a public record of forecast errors.</p>
+
 ## Sources
 
 ```js
@@ -203,4 +299,10 @@ display(sourceIds.length
 .scenario .dir { font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
 .scenario ul, .persona ul { padding-left: 1.1rem; }
 .sources li { margin-bottom: 0.3rem; }
+.baseline-card h3 { margin-top: 0; font-size: 1rem; }
+.baseline-card .proj { margin-top: 0.4rem; font-size: 1.05rem; }
+.claude-view { margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--theme-foreground-faintest); }
+.assumptions ul { margin-top: 0.2rem; }
+table.score { width: 100%; font-size: 0.85rem; }
+table.score td.chosen { font-weight: 700; }
 </style>

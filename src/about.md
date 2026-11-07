@@ -22,6 +22,8 @@
 - **Resale data.** TRREB figures are Vaughan-wide and come from parsing TRREB's public PDF reports. They are reproduced with attribution; TRREB is not affiliated with this site. Some months' PDFs can't be parsed reliably and are skipped.
 - **AI-written summary.** The "What it means for you" page is generated weekly by Claude. Every statement must cite a source from this site's data or a web page Claude retrieved; statements citing anything else are removed automatically before publishing. It can still misread a source, so follow the citations for anything important. It is educational, not financial advice.
 
+- **Baseline projections and scorecard.** For each measure, two simple methods ("no change" and a damped trend) are tested on past data and the more accurate one is used. The 80% range comes from that method's past errors. Every projection, and Claude's adjusted call next to it, is saved in `forecast_log.csv` and scored once its target date passes. Approach after Klein & Young, *An Introduction to Econometric Forecasting and Forecasting Models* (1980), and Evans & Klein, *The Wharton Econometric Forecasting Model*.
+
 ## Raw data
 
 All data files are in the [GitHub repo](https://github.com/shashemi23/vmc-growth-tracker/tree/main/src/data) as CSV/GeoJSON, with full history in the git log.

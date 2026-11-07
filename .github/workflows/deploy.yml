@@ -49,6 +49,7 @@ jobs:
           python pipeline/fetch_cmhc.py
           python pipeline/fetch_trreb.py
           python pipeline/fetch_boc.py
+          python pipeline/baseline.py
 
       - name: Generate plain-language summary (Claude)
         if: (github.event_name == 'schedule' || inputs.refresh_data) && env.HAS_ANTHROPIC_KEY == 'true'

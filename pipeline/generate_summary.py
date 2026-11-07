@@ -161,7 +161,18 @@ def digest() -> tuple[dict, dict]:
             "note": "Posted rates are higher than typical negotiated rates.",
         })
 
+    bl = load_baseline()
+    if bl:
+        add("data:baseline", "Baseline projections with 80% bands, backtested on history", "outlook#baseline", [
+            {k: s[k] for k in ("id", "label", "unit", "origin", "target", "current", "method",
+                               "forecast", "low", "high", "backtest")} for s in bl["series"]])
+
     return facts, sources
+
+
+def load_baseline() -> dict | None:
+    path = DATA_DIR / "baseline.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
 # ---------------------------------------------------------------- Claude calls
@@ -226,7 +237,7 @@ def research(client: anthropic.Anthropic) -> tuple[str, dict]:
     return "\n".join(text_parts), found
 
 
-def build_schema() -> dict:
+def build_schema(baseline_ids: list[str]) -> dict:
     cite = {"type": "array", "items": {"type": "string"},
             "description": "Source ids backing this item, e.g. data:resale or web:3"}
 
@@ -256,8 +267,20 @@ def build_schema() -> dict:
             "likelihood": {"type": "string", "enum": ["less likely", "most likely", "possible"]},
             "horizon": {"type": "string", "description": "e.g. next 12-24 months"},
             "summary": {"type": "string"},
+            "assumptions": {"type": "array", "items": obj({
+                "driver": {"type": "string", "description": "e.g. Bank of Canada policy rate"},
+                "assumption": {"type": "string",
+                               "description": "Concrete and checkable, e.g. 'falls to 2.0-2.25% by late 2027'"},
+                "cite": cite})},
             "drivers": {"type": "array", "items": obj({
                 "text": {"type": "string"}, "direction": direction, "cite": cite})}})},
+        "baseline_views": {"type": "array", "items": obj({
+            "series_id": {"type": "string", "enum": baseline_ids or ["none"]},
+            "view": {"type": "string", "enum": ["above baseline", "in line with baseline", "below baseline"]},
+            "expected_low": {"type": "number"},
+            "expected_high": {"type": "number"},
+            "reason": {"type": "string", "description": "Why you differ from (or agree with) the baseline"},
+            "cite": cite})},
         "events": {"type": "array", "items": obj({
             "date": {"type": "string", "description": "YYYY-MM-DD or YYYY-MM"},
             "level": {"type": "string", "enum": ["national", "provincial", "regional", "local"]},
@@ -288,10 +311,20 @@ Rules:
 - Educational only: no instructions to buy or sell, no financial advice.
 - Note limits where relevant: rents are for a wider CMHC zone, resale prices are
   Vaughan-wide (the VMC is mostly condo apartments), the census tract is bigger than the VMC.
-- Cover all six personas, all three scenarios, 4-10 events, 4-8 watch-list items."""
+- Cover all six personas, all three scenarios, 4-10 events, 4-8 watch-list items.
+- BASELINE: data:baseline holds mechanical projections with 80% bands whose width comes
+  from past errors. For every baseline series give a baseline_view: whether you expect
+  the outcome above, in line with, or below the baseline, your own expected_low and
+  expected_high in the same unit, and the reason with citations. Depart from the baseline
+  only when cited evidence supports it; "in line" is a valid answer. These calls are
+  logged and scored against what actually happens.
+- SCENARIOS: give each scenario 2-5 explicit assumptions about outside drivers (interest
+  rates, population/immigration, policy, the wider economy) that are concrete enough to
+  check later, each with a citation."""
 
 
-def write(client: anthropic.Anthropic, facts: dict, research_text: str, sources: dict) -> dict:
+def write(client: anthropic.Anthropic, facts: dict, research_text: str, sources: dict,
+          baseline_ids: list[str]) -> dict:
     table = "\n".join(f"{sid}: {s['title']} ({s['url']})" for sid, s in sources.items())
     user = (f"Today is {dt.date.today().isoformat()}.\n\n"
             f"<source_table>\n{table}\n</source_table>\n\n"
@@ -301,7 +334,7 @@ def write(client: anthropic.Anthropic, facts: dict, research_text: str, sources:
         model=MODEL, max_tokens=16000, betas=[FALLBACK_BETA], fallbacks="default",
         system=WRITE_SYSTEM,
         output_config={"effort": "high",
-                       "format": {"type": "json_schema", "schema": build_schema()}},
+                       "format": {"type": "json_schema", "schema": build_schema(baseline_ids)}},
         messages=[{"role": "user", "content": user}])
     check(resp)
     text = next(b.text for b in resp.content if b.type == "text")
@@ -310,7 +343,7 @@ def write(client: anthropic.Anthropic, facts: dict, research_text: str, sources:
 
 # ---------------------------------------------------------------- validation
 
-def validate(summary: dict, valid_ids: set) -> int:
+def validate(summary: dict, valid_ids: set, baseline_ids: set) -> int:
     """Strip unknown citation ids; drop items left with none. Returns items dropped."""
     dropped = 0
 
@@ -333,18 +366,47 @@ def validate(summary: dict, valid_ids: set) -> int:
         p["points"] = clean(p.get("points", []))
     for s in summary.get("scenarios", []):
         s["drivers"] = clean(s.get("drivers", []))
+        s["assumptions"] = clean(s.get("assumptions", []))
+    views = [v for v in summary.get("baseline_views", [])
+             if v["series_id"] in baseline_ids and 0 < v["expected_low"] <= v["expected_high"]]
+    dropped += len(summary.get("baseline_views", [])) - len(views)
+    summary["baseline_views"] = clean(views)
     return dropped
 
 
 def cited_ids(summary: dict) -> set:
     used = set(summary["headline_cite"])
-    for key in ("status", "events", "watch_list"):
+    for key in ("status", "events", "watch_list", "baseline_views"):
         used |= {c for it in summary[key] for c in it["cite"]}
     for p in summary["personas"]:
         used |= {c for it in p["points"] for c in it["cite"]}
     for s in summary["scenarios"]:
-        used |= {c for it in s["drivers"] for c in it["cite"]}
+        used |= {c for it in s["drivers"] + s["assumptions"] for c in it["cite"]}
     return used
+
+
+def log_views(summary: dict, baseline: dict) -> int:
+    """Append Claude's adjusted calls to the forecast log so they are scored like the baseline."""
+    from baseline import LOG_FIELDS
+    from common import read_csv, write_csv
+    path = DATA_DIR / "forecast_log.csv"
+    log = read_csv(path)
+    keys = {(r["origin"], r["source"], r["series_id"]) for r in log}
+    recs = {s["id"]: s for s in baseline["series"]}
+    added = 0
+    for v in summary["baseline_views"]:
+        b = recs[v["series_id"]]
+        key = (b["origin"], "claude", b["id"])
+        if key in keys:
+            continue  # one Claude call per data point, like the baseline
+        lo, hi = v["expected_low"], v["expected_high"]
+        log.append({"origin": b["origin"], "source": "claude", "series_id": b["id"], "target": b["target"],
+                    "forecast": round((lo + hi) / 2, 1), "low": lo, "high": hi,
+                    "logged_on": dt.date.today().isoformat()})
+        keys.add(key)
+        added += 1
+    write_csv(path, log, LOG_FIELDS)
+    return added
 
 
 def main() -> None:
@@ -362,8 +424,11 @@ def main() -> None:
     for i, (url, meta) in enumerate(found.items(), 1):
         sources[f"web:{i}"] = {"kind": "web", "title": meta["title"] or url, "url": url,
                                "page_age": meta.get("page_age")}
-    summary = write(client, facts, research_text, sources)
-    dropped = validate(summary, set(sources))
+    baseline = load_baseline() or {"series": []}
+    baseline_ids = [s["id"] for s in baseline["series"]]
+    summary = write(client, facts, research_text, sources, baseline_ids)
+    dropped = validate(summary, set(sources), set(baseline_ids))
+    logged = log_views(summary, baseline)
     used = cited_ids(summary)
     summary.update({
         "generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
@@ -372,7 +437,8 @@ def main() -> None:
         "sources": {sid: s for sid, s in sources.items() if sid in used},
     })
     write_json(OUT, summary)
-    print(f"summary: {len(summary['sources'])} sources cited, {dropped} uncited items dropped")
+    print(f"summary: {len(summary['sources'])} sources cited, {dropped} uncited/invalid items dropped, "
+          f"{logged} Claude calls logged")
 
 
 if __name__ == "__main__":

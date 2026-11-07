@@ -17,7 +17,8 @@ Dashboard tracking economic growth in the **Vaughan Metropolitan Centre (VMC)**:
 ```
 GitHub Actions (weekly cron, Mondays)
   -> pipeline/fetch_*.py pull public data (York Region, CMHC, TRREB, Bank of Canada)
-  -> pipeline/generate_summary.py has Claude write the cited plain-language summary
+  -> pipeline/baseline.py projects each measure with backtested 80% bands and scores past forecasts
+  -> pipeline/generate_summary.py has Claude write the cited summary, adjust the baseline, state scenario assumptions
   -> commit CSV/GeoJSON to src/data/   (git history = data history)
   -> Observable Framework builds a static site
   -> GitHub Pages hosts it (free)

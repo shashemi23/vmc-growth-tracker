@@ -6,7 +6,7 @@ registry of every application ever seen. When an application drops off the
 feed (approved, withdrawn or closed), the registry keeps it with active=False.
 
 Outputs (src/data/):
-  devapps.geojson           current active applications with geometry
+  devapps.geojson           current active application outlines (file_num only)
   devapps_registry.csv      every application seen, with first/last seen dates
   devapps_snapshots.csv     one summary row per run date
 """
@@ -17,7 +17,7 @@ import datetime as dt
 import json
 import re
 
-from common import DATA_DIR, http, read_csv, write_csv, write_json
+from common import DATA_DIR, http, read_csv, write_csv
 
 URL = ("https://ww8.yorkmaps.ca/arcgis/rest/services/OpenData/"
        "DevelopmentApplicationStatusAndTeams/MapServer/0/query")
@@ -61,6 +61,17 @@ def parse_storeys(desc: str) -> int | None:
         nums += [int(n) for n in re.findall(r"\d+", m.group(1))]
     nums = [n for n in nums if 0 < n < 120]
     return max(nums) if nums else None
+
+
+def round_coords(geom):
+    """Round to 5 decimals (~1 m), plenty for parcel outlines and ~4x smaller."""
+    if not geom:
+        return geom
+
+    def rnd(c):
+        return [rnd(x) for x in c] if isinstance(c[0], list) else [round(c[0], 5), round(c[1], 5)]
+
+    return {**geom, "coordinates": rnd(geom["coordinates"])}
 
 
 def ms_to_date(ms) -> str:
@@ -116,11 +127,13 @@ def main() -> None:
         }
         # One application can span several parcels; keep the first record's attributes.
         current.setdefault(rec["file_num"], rec)
-        out_features.append({"type": "Feature", "geometry": f.get("geometry"),
-                             "properties": {k: rec[k] for k in REGISTRY_FIELDS[:13]}})
+        # Geometry only; the page joins attributes from devapps_registry.csv by file_num.
+        out_features.append({"type": "Feature", "geometry": round_coords(f.get("geometry")),
+                             "properties": {"file_num": rec["file_num"]}})
 
-    write_json(DATA_DIR / "devapps.geojson",
-               {"type": "FeatureCollection", "generated": today, "features": out_features})
+    (DATA_DIR / "devapps.geojson").write_text(json.dumps(
+        {"type": "FeatureCollection", "generated": today, "features": out_features},
+        separators=(",", ":")) + "\n", encoding="utf-8")
 
     # Registry: merge with history.
     reg_path = DATA_DIR / "devapps_registry.csv"

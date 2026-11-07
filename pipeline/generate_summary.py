@@ -89,9 +89,9 @@ def digest() -> tuple[dict, dict]:
     monthly = load("cmhc_vaughan_monthly.csv")
     annual = defaultdict(float)
     for r in monthly:
-        if r["series"] in ("starts", "completions") and r["dwelling_type"] == "All":
-            annual[(r["series"], r["date"][:4])] += f(r["units"]) or 0
-    uc = [r for r in monthly if r["series"] == "under_construction" and r["dwelling_type"] == "All"]
+        if r["series"] in ("starts", "completions"):
+            annual[(r["series"], r["date"][:4])] += f(r["All"]) or 0
+    uc = [{"date": r["date"], "units": r["All"]} for r in monthly if r["series"] == "under_construction"]
     latest_year = max(int(y) for _, y in annual) if annual else 0
     add("data:vaughan_supply", "CMHC starts, completions, under construction, City of Vaughan", "housing", {
         "annual_totals": {f"{s} {y}": v for (s, y), v in sorted(annual.items()) if int(y) >= latest_year - 9},

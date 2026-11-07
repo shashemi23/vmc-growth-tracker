@@ -4,7 +4,8 @@ Source: CMHC Housing Market Information Portal (HMIP) CSV export, the same
 endpoint the `cmhc` R package uses. Not an official API, so it may change.
 
 Outputs (src/data/):
-  cmhc_vaughan_monthly.csv   starts / completions / under construction, monthly, 1990+
+  cmhc_vaughan_monthly.csv   starts / completions / under construction, monthly, 1990+,
+                             one column per dwelling type
   cmhc_vmc_tract_annual.csv  starts / completions for VMC census tract(s), annual
   cmhc_rental_zone.csv       purpose-built rental vacancy and average rent (October survey),
                              Richmond Hill/Vaughan/King zone vs Toronto CMA
@@ -68,7 +69,11 @@ def num(s: str):
         return ""  # "**" = suppressed, "-" = none
 
 
+MONTHLY_TYPES = ["Single", "Semi-Detached", "Row", "Apartment", "All"]
+
+
 def vaughan_monthly() -> None:
+    """One row per (month, series) with a column per dwelling type (wide = ~4x smaller)."""
     rows = []
     for series, table in [("starts", "1.2.1"), ("completions", "1.2.2"), ("under_construction", "1.2.3")]:
         header, body = table_body(export(TableId=table, GeographyId=VAUGHAN_CSD,
@@ -78,11 +83,11 @@ def vaughan_monthly() -> None:
         types = [h for h in header[1:] if h]
         for r in body:
             mon, year = r[0].split()
-            date = f"{year}-{MONTHS[mon]:02d}-01"
-            for t, v in zip(types, r[1:]):
-                rows.append({"date": date, "series": series, "dwelling_type": t, "units": num(v)})
+            row = {"date": f"{year}-{MONTHS[mon]:02d}-01", "series": series}
+            row.update({t: num(v) for t, v in zip(types, r[1:])})
+            rows.append(row)
         time.sleep(1)
-    write_csv(DATA_DIR / "cmhc_vaughan_monthly.csv", rows, ["date", "series", "dwelling_type", "units"])
+    write_csv(DATA_DIR / "cmhc_vaughan_monthly.csv", rows, ["date", "series", *MONTHLY_TYPES])
     print(f"cmhc vaughan monthly: {len(rows)} rows")
 
 

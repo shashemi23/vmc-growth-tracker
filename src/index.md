@@ -9,7 +9,6 @@ Tracking the build-out of the **Vaughan Metropolitan Centre**: the development p
 ```js
 import {seriesColor} from "./components/palette.js";
 
-const registry = FileAttachment("data/devapps_registry.csv").csv({typed: true});
 const snapshots = FileAttachment("data/devapps_snapshots.csv").csv({typed: true});
 const tract = FileAttachment("data/cmhc_vmc_tract_annual.csv").csv({typed: true});
 const monthly = FileAttachment("data/cmhc_vaughan_monthly.csv").csv({typed: true});
@@ -17,14 +16,13 @@ const rental = FileAttachment("data/cmhc_rental_zone.csv").csv({typed: true});
 ```
 
 ```js
-const active = registry.filter((d) => String(d.active) === "True");
 const latestSnap = snapshots.at(-1);
 const tractAll = tract.filter((d) => d.dwelling_type === "All");
 const fullYears = tractAll.filter((d) => String(d.partial_year) !== "True");
 const lastFullYear = d3.max(fullYears, (d) => d.year);
 const startsLastYear = fullYears.find((d) => d.series === "starts" && d.year === lastFullYear)?.units;
 const startsYtd = tractAll.find((d) => String(d.partial_year) === "True" && d.series === "starts");
-const ucAll = monthly.filter((d) => d.series === "under_construction" && d.dwelling_type === "All");
+const ucAll = monthly.filter((d) => d.series === "under_construction").map((d) => ({date: d.date, units: d.All}));
 const ucLatest = ucAll.at(-1);
 const ucYearAgo = ucAll.at(-13);
 const ZONE = "Richmond Hill/Vaughan/King";
@@ -42,7 +40,7 @@ const tractLabel = tract.length ? d3.format("07.2f")(tract[0].tract) : "";
 <div class="grid grid-cols-4">
   <a class="card kpi" href="./development">
     <h2>Active applications in VMC</h2>
-    <span class="big">${fmt(active.length)}</span>
+    <span class="big">${fmt(latestSnap.active_apps)}</span>
     <span class="muted">York Region feed, as of ${dayFmt(latestSnap.snapshot_date)}</span>
   </a>
   <a class="card kpi" href="./development">

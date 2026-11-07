@@ -14,8 +14,10 @@ const rental = FileAttachment("data/cmhc_rental_zone.csv").csv({typed: true});
 const types = dwellingColor(dark).domain;
 const latestMonth = d3.max(monthly, (d) => d.date);
 const partialYear = latestMonth.getUTCMonth() < 11 ? latestMonth.getUTCFullYear() : null;
+// monthly has one column per dwelling type; unpivot the ones charted.
 const annual = d3.flatRollup(
-  monthly.filter((d) => d.series !== "under_construction" && types.includes(d.dwelling_type)),
+  monthly.filter((d) => d.series !== "under_construction")
+    .flatMap((d) => types.map((t) => ({date: d.date, series: d.series, dwelling_type: t, units: d[t]}))),
   (v) => d3.sum(v, (d) => d.units),
   (d) => d.series,
   (d) => d.date.getUTCFullYear(),
@@ -109,7 +111,7 @@ const yearRange = view(Inputs.range([1990, d3.max(annual, (d) => d.year)], {labe
 </div>
 
 ```js
-const uc = monthly.filter((d) => d.series === "under_construction" && d.dwelling_type === "All" && d.date.getUTCFullYear() >= yearRange);
+const uc = monthly.filter((d) => d.series === "under_construction" && d.date.getUTCFullYear() >= yearRange).map((d) => ({date: d.date, units: d.All}));
 display(resize((width) => Plot.plot({
   title: "Units under construction, monthly",
   width,

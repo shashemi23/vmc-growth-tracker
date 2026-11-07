@@ -12,6 +12,7 @@ const snapshots = FileAttachment("data/devapps_snapshots.csv").csv({typed: true}
 
 ```js
 const active = registry.filter((d) => String(d.active) === "True");
+const byFile = new Map(registry.map((d) => [d.file_num, d]));
 const closed = registry.filter((d) => String(d.active) !== "True");
 const blue = seriesColor(dark, 0);
 ```
@@ -33,14 +34,14 @@ const layer = L.geoJSON(
   {
     style: {color: blue, weight: 1.5, fillOpacity: 0.25},
     onEachFeature: (f, l) => {
-      const p = f.properties;
+      const p = byFile.get(f.properties.file_num) ?? f.properties;
       l.bindPopup(html`<div style="max-width:280px">
         <strong>${p.name || p.file_num}</strong><br>
         ${p.type}${p.subtype ? ` (${p.subtype})` : ""} · ${p.stage}<br>
         ${p.address || p.location}<br>
         ${p.units_est ? html`<b>~${p.units_est} units</b>` : ""} ${p.storeys_max ? `· up to ${p.storeys_max} storeys` : ""}
         <p style="font-size:12px;margin:.5em 0 0">${p.description}</p>
-        <small>${p.file_num} · received ${p.date_received}</small>
+        <small>${p.file_num}${p.date_received ? ` · received ${d3.utcFormat("%Y-%m-%d")(p.date_received)}` : ""}</small>
       </div>`);
     }
   }

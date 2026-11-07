@@ -29,9 +29,9 @@ FIRST_MONTH = dt.date(2015, 1, 1)
 AREA = "Vaughan"
 
 SALES_FIELDS = ["month", "home_type", "sales", "dollar_volume", "avg_price", "median_price",
-                "new_listings", "active_listings", "snlr_pct", "months_inventory", "sp_lp_pct",
-                "source_url"]
-HPI_FIELDS = ["month", "home_type", "index", "benchmark_price", "yoy_pct", "source_url"]
+                "new_listings", "active_listings", "snlr_pct", "months_inventory", "sp_lp_pct"]
+HPI_FIELDS = ["month", "home_type", "index", "benchmark_price", "yoy_pct"]
+# Source PDF for a month is URL.format(yymm=...); not stored per row to keep the CSVs small.
 HPI_TYPES = ["Composite", "Detached", "Semi-Detached/Attached", "Townhouse", "Apartment"]
 
 # Checked in order: more specific titles first ("Semi-Detached" contains "Detached").
@@ -75,7 +75,7 @@ def page_kind(header: str):
     return None
 
 
-def parse_pdf(data: bytes, month: str, url: str):
+def parse_pdf(data: bytes, month: str):
     sales_rows, hpi_rows = [], []
     with pdfplumber.open(io.BytesIO(data)) as pdf:
         for page in pdf.pages:
@@ -96,8 +96,7 @@ def parse_pdf(data: bytes, month: str, url: str):
                     chunk = vals[i * 3:(i + 1) * 3]
                     if len(chunk) == 3:
                         hpi_rows.append({"month": month, "home_type": ht, "index": chunk[0],
-                                         "benchmark_price": chunk[1], "yoy_pct": chunk[2],
-                                         "source_url": url})
+                                         "benchmark_price": chunk[1], "yoy_pct": chunk[2]})
                 continue
             if any(r["home_type"] == kind for r in sales_rows):
                 continue  # first table of a type wins
@@ -105,7 +104,7 @@ def parse_pdf(data: bytes, month: str, url: str):
                 # Mid-2022 to mid-2025 reports overlay two tables on one page, so
                 # values interleave ("$$11,,220514..."). Skip rather than guess.
                 continue
-            rec = {"month": month, "home_type": kind, "source_url": url}
+            rec = {"month": month, "home_type": kind}
             if len(toks) < 5:  # no sales: "Vaughan 0 3 4" = sales, new listings, active
                 vals = [num(t) for t in toks]
                 rec.update(sales=vals[0] if vals else 0,
@@ -143,7 +142,7 @@ def fetch_month(month: str):
         return month, None, None, "not available"
     if not data.startswith(b"%PDF"):
         return month, None, None, "not a PDF"
-    s, h = parse_pdf(data, month, url)
+    s, h = parse_pdf(data, month)
     if not s and not h:
         return month, None, None, f"no {AREA} rows parsed"
     return month, s, h, f"{len(s)} home types, {len(h)} HPI rows"

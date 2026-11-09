@@ -1,37 +1,36 @@
 {
- "headline": "Prices for a typical Vaughan home are about 5% lower than a year ago, and condo apartments are down about 6.5%. The Bank of Canada raised its rate to 2.5% on October 28, which keeps borrowing costs from falling. Few new towers are starting, so the VMC is in a slow, wait-and-see stretch.",
+ "headline": "Prices for a typical Vaughan home are down about 5% from a year ago, and the Bank of Canada raised its rate on Oct. 28. Builders have 89 active VMC applications, but fewer new projects are starting. Buyers have more choice and more room to bargain, while borrowing costs have stopped falling.",
  "headline_cite": [
   "data:resale",
-  "data:rates",
-  "data:vaughan_supply"
+  "data:devapps",
+  "web:1"
  ],
  "status": [
   {
    "area": "supply",
-   "signal": "falling",
-   "label": "Fewer new homes under way",
-   "explanation": "Vaughan had 3,144 homes under construction in September, down from 3,588 a year ago and far below the peak of 9,815. Only 1,243 homes have started so far in 2026. Many towers finished in 2025 (6,368 completions). The VMC census tract recorded 673 starts so far this year. Across the GTHA, pre-construction and under-construction condo inventory is down 37% from a year earlier.",
+   "signal": "mixed",
+   "label": "Many plans, fewer starts",
+   "explanation": "There are 89 active VMC applications, with about 17,363 units in active site plans. But Vaughan units under construction fell to 3,144 from 3,588 a year ago, and the peak was 9,815.",
    "cite": [
-    "data:vaughan_supply",
-    "data:tract",
-    "web:5"
+    "data:devapps",
+    "data:vaughan_supply"
    ]
   },
   {
    "area": "demand",
    "signal": "mixed",
-   "label": "Weak jobs, steady resales",
-   "explanation": "Ontario's unemployment rate rose to 7.3% in October, and employment was little changed for a third month. Fewer jobs can mean fewer new buyers and renters. In Vaughan, resale activity continues: 263 sales in October, with 4.8 months of inventory.",
+   "label": "Buyers cautious, rebound in new condos",
+   "explanation": "Vaughan had 263 resale deals in October 2026, with 4.8 months of inventory. Across the GTHA, new condo sales rose 52% to 702 units in Q2 2026, but from a 35-year low.",
    "cite": [
-    "web:6",
-    "data:resale"
+    "data:resale",
+    "web:4"
    ]
   },
   {
    "area": "prices",
    "signal": "falling",
-   "label": "Prices still drifting lower",
-   "explanation": "The typical Vaughan condo apartment is priced at $504,900, down 6.5% from a year ago and about 42% below its March 2022 peak of $864,400. Buyers paid about 97% of the asking price in October. These are Vaughan-wide figures; the VMC is mostly condo apartments.",
+   "label": "Typical prices down 5%",
+   "explanation": "The benchmark price of a typical Vaughan home is $1,106,600, down 5.46% from a year ago. A typical condo apartment is $504,900, down 6.51%.",
    "cite": [
     "data:resale"
    ]
@@ -39,20 +38,20 @@
   {
    "area": "rents",
    "signal": "steady",
-   "label": "Rents flat to slightly lower",
-   "explanation": "Average rent in the Richmond Hill/Vaughan/King zone was $1,726 in 2025, down from $1,762 in 2024. Vacancy was 2.4%. This is a wider zone than the VMC. CMHC says rental conditions are expected to continue easing.",
+   "label": "Rents flat to lower",
+   "explanation": "Average rent in the wider Richmond Hill/Vaughan/King zone was $1,726 in 2025, down from $1,762 in 2024, with a 2.4% vacancy rate. This zone is bigger than the VMC.",
    "cite": [
-    "data:rental",
-    "web:7"
+    "data:rental"
    ]
   },
   {
    "area": "momentum",
    "signal": "mixed",
-   "label": "Plans are big, starts are slow",
-   "explanation": "There are 89 active development applications, with about 17,363 homes proposed in active site plans. But no new applications arrived in the last 180 days, and the GTA presale market is very weak: only 50 pre-construction condo sales in the GTHA in the second quarter.",
+   "label": "Rate hike, tax relief",
+   "explanation": "The policy rate rose to 2.5% from 2.25% a year ago. The posted 5-year mortgage rate is 6.19%. Ontario's expanded HST relief on new homes and lower development charges work the other way.",
    "cite": [
-    "data:devapps",
+    "data:rates",
+    "web:1",
     "web:5"
    ]
   }
@@ -60,186 +59,151 @@
  "personas": [
   {
    "id": "first_time_buyer",
-   "bottom_line": "Prices are lower than a year ago, but borrowing costs are not falling.",
+   "bottom_line": "Prices are lower than a year ago, but borrowing costs just went up, so the monthly payment matters more than the sticker price.",
    "points": [
     {
-     "text": "A typical Vaughan condo apartment costs $504,900, about 6.5% less than a year ago.",
+     "text": "A typical Vaughan condo apartment costs $504,900, down 6.51% from a year ago.",
      "cite": [
       "data:resale"
      ]
     },
     {
-     "text": "The Bank of Canada raised its rate to 2.5%. The posted 5-year mortgage rate is 6.19%, a little higher than a year ago. Posted rates are higher than most negotiated rates.",
+     "text": "Ontario says expanded HST relief on new homes could save eligible buyers, including first-time buyers, up to $130,000. Check the rules for your own case.",
      "cite": [
-      "data:rates",
-      "web:1"
+      "web:5"
      ]
     },
     {
-     "text": "Buyers of new condos in the GTHA often paid well below the asking price, and developers hold a record number of finished, unsold units.",
+     "text": "The Bank of Canada raised its rate to 2.5% on Oct. 28 and said more increases may be needed.",
      "cite": [
-      "web:5"
+      "web:1"
      ]
     }
    ],
    "watch": [
-    "Next Bank of Canada decision",
-    "Whether prices stop falling",
-    "Your own job security"
+    "Bank of Canada decision on Dec. 9",
+    "Mortgage rate quotes from lenders"
    ]
   },
   {
    "id": "renter",
-   "bottom_line": "Rents are not rising fast, and there is more choice than a few years ago.",
+   "bottom_line": "Rents in the wider zone are flat to lower, with some choice for tenants.",
    "points": [
     {
-     "text": "Average rent in the Vaughan area zone was $1,726 in 2025, lower than $1,762 in 2024. Vacancy was 2.4%.",
+     "text": "Average rent in the Richmond Hill/Vaughan/King zone was $1,726 in 2025, versus $1,917 in the Toronto area.",
      "cite": [
       "data:rental"
      ]
     },
     {
-     "text": "CMHC says rental conditions are expected to continue easing, but slowing condo completions will place renewed pressure on rents in coming years.",
+     "text": "Vacancy in that zone was 2.4% in 2025. These are zone numbers, not VMC-only numbers.",
      "cite": [
-      "web:7",
-      "web:8"
-     ]
-    },
-    {
-     "text": "Condo completions in Vaughan were 6,368 in 2025, which added many possible rental homes. Starts have since slowed.",
-     "cite": [
-      "data:vaughan_supply"
+      "data:rental"
      ]
     }
    ],
    "watch": [
-    "Rental Market Survey results next year",
-    "New condo completions",
-    "Local job market"
+    "Next CMHC rental survey",
+    "Vaughan units under construction"
    ]
   },
   {
    "id": "family",
-   "bottom_line": "Family-sized homes are cheaper than a year ago, but the economy is soft.",
+   "bottom_line": "More choice and lower prices help, but higher rates and a thin pipeline of new homes cut the other way.",
    "points": [
     {
-     "text": "A typical Vaughan townhouse is $714,500 (down 8.9% in a year). A typical detached home is $1,482,000 (down 5.4%).",
+     "text": "A typical Vaughan townhouse costs $714,500, down 8.85% from a year ago; a detached home costs $1,482,000, down 5.35%.",
      "cite": [
       "data:resale"
      ]
     },
     {
-     "text": "Ontario's unemployment rate was 7.3% in October, and employment has been flat for three months.",
+     "text": "Vaughan has 4.8 months of resale inventory, which gives buyers more time than in tight markets.",
      "cite": [
-      "web:6"
-     ]
-    },
-    {
-     "text": "Mortgage rates are not falling: the Bank of Canada raised its rate on October 28 because inflation has been higher than expected.",
-     "cite": [
-      "web:1",
-      "data:rates"
+      "data:resale"
      ]
     }
    ],
    "watch": [
-    "Job market",
-    "Mortgage renewal costs",
-    "Prices of townhouses"
+    "Mortgage rates",
+    "Months of inventory in Vaughan"
    ]
   },
   {
    "id": "seller",
-   "bottom_line": "Sellers face lower prices and a market with plenty of choice for buyers.",
+   "bottom_line": "Prices are below last year and well below the 2022 peak, so selling conditions are softer.",
    "points": [
     {
-     "text": "Vaughan homes sold at about 97% of asking price in October, with 4.8 months of inventory.",
+     "text": "The typical Vaughan home price is $1,106,600, against a peak of $1,587,400 in March 2022.",
      "cite": [
       "data:resale"
      ]
     },
     {
-     "text": "A typical condo apartment has lost about 42% of its value since March 2022. Prices are still above the level of 10 years ago ($420,300).",
+     "text": "Homes sold for about 97% of the asking price in October 2026.",
      "cite": [
       "data:resale"
      ]
     },
     {
-     "text": "There are 419 active condo apartment listings in Vaughan and 57 condo sales in October.",
+     "text": "Developers hold a record 5,001 finished but unsold condo units across the GTHA, which can compete with resale condos.",
      "cite": [
-      "data:resale"
-     ]
-    },
-    {
-     "text": "Developers hold a record 5,001 finished, unsold condos in the GTHA, which competes with resale listings.",
-     "cite": [
-      "web:5"
+      "web:4"
      ]
     }
    ],
    "watch": [
-    "Months of inventory",
     "Sale-to-list ratio",
-    "Rate decisions"
+    "Unsold new condo inventory"
    ]
   },
   {
    "id": "investor",
-   "bottom_line": "Rents are flat while prices are falling, so the numbers are tight and the risks are real.",
+   "bottom_line": "Lower prices and a cooling market come with higher borrowing costs and a large supply of new condos, so returns are uncertain.",
    "points": [
     {
-     "text": "Average rents in the wider zone were $1,726 in 2025, with vacancy at 2.4%.",
+     "text": "The posted 5-year mortgage rate is 6.19%, versus 6.09% a year ago.",
+     "cite": [
+      "data:rates"
+     ]
+    },
+    {
+     "text": "Rents in the wider zone slipped from $1,762 to $1,726 between 2024 and 2025.",
      "cite": [
       "data:rental"
      ]
     },
     {
-     "text": "GTHA new condo sales rose in the second quarter, but included some large bulk sales to investment groups. Pre-construction sales fell 80%.",
+     "text": "Vaughan finished 6,368 units in 2025, which adds rental and resale supply.",
      "cite": [
-      "web:5"
-     ]
-    },
-    {
-     "text": "Borrowing costs are not falling: the policy rate rose to 2.5% and the posted 5-year mortgage rate is 6.19%.",
-     "cite": [
-      "data:rates",
-      "web:1"
-     ]
-    }
-   ],
-   "watch": [
-    "Vacancy rates",
-    "Bank of Canada decisions",
-    "Newcomer numbers"
-   ]
-  },
-  {
-   "id": "downsizer",
-   "bottom_line": "Selling a bigger home may bring less than in 2022, while condo prices are also lower.",
-   "points": [
-    {
-     "text": "A typical Vaughan detached home is $1,482,000, down 23% from its June 2022 peak of $1,926,600.",
-     "cite": [
-      "data:resale"
-     ]
-    },
-    {
-     "text": "A typical condo apartment is $504,900, so the gap between a house sale and a condo purchase is still large.",
-     "cite": [
-      "data:resale"
-     ]
-    },
-    {
-     "text": "There are many condo listings (419 active in October) and new buildings keep finishing, so there is choice.",
-     "cite": [
-      "data:resale",
       "data:vaughan_supply"
      ]
     }
    ],
    "watch": [
-    "Condo prices",
-    "Fees and costs in new buildings",
+    "Rent and vacancy trends",
+    "Bank of Canada decisions"
+   ]
+  },
+  {
+   "id": "downsizer",
+   "bottom_line": "Sellers of larger homes are getting less than a year ago, but condos cost less too.",
+   "points": [
+    {
+     "text": "A typical detached home is $1,482,000 (down 5.35%); a typical condo apartment is $504,900 (down 6.51%).",
+     "cite": [
+      "data:resale"
+     ]
+    },
+    {
+     "text": "Vaughan had 419 active condo apartment listings in October 2026, so there are many choices.",
+     "cite": [
+      "data:resale"
+     ]
+    }
+   ],
+   "watch": [
+    "Condo listings and prices",
     "Interest rates"
    ]
   }
@@ -249,34 +213,34 @@
    "name": "optimistic",
    "likelihood": "less likely",
    "horizon": "next 12-24 months",
-   "summary": "Prices stabilise and new building restarts as costs and fees come down.",
+   "summary": "Rates stop rising, buyers return, and more VMC projects start building.",
    "assumptions": [
     {
      "driver": "Bank of Canada policy rate",
-     "assumption": "Stays at or below 2.5% through 2027, with no further hikes.",
+     "assumption": "Holds at 2.5% or lower through 2027, with no further hikes after Oct. 28",
      "cite": [
-      "web:1",
-      "data:rates"
+      "web:1"
      ]
     },
     {
-     "driver": "Development charges",
-     "assumption": "Cuts to development charges under the Ontario-federal deal reach builders and lower project costs.",
+     "driver": "Ontario housing policy",
+     "assumption": "Expanded HST relief on new homes runs for its one-year term and boosts new condo sales",
      "cite": [
-      "web:4"
-     ]
-    },
-    {
-     "driver": "Jobs",
-     "assumption": "Ontario unemployment falls back below the 7.0% level by late 2027.",
-     "cite": [
-      "web:6"
+      "web:5"
      ]
     }
    ],
    "drivers": [
     {
-     "text": "A deal to cut development charges in half for three years could make some projects pay off again.",
+     "text": "Lower development charges can improve project math for builders.",
+     "direction": "helps growth",
+     "cite": [
+      "web:3",
+      "web:6"
+     ]
+    },
+    {
+     "text": "New condo sales rose 52% in Q2 2026 from a very low base.",
      "direction": "helps growth",
      "cite": [
       "web:4"
@@ -288,46 +252,22 @@
    "name": "base",
    "likelihood": "most likely",
    "horizon": "next 12-24 months",
-   "summary": "Prices drift sideways to slightly lower, new starts stay low and the VMC grows slowly.",
+   "summary": "Prices stay soft and the market moves sideways, while approved projects slowly move toward construction.",
    "assumptions": [
     {
-     "driver": "Bank of Canada policy rate",
-     "assumption": "Stays near 2.5% for most of 2027, as inflation is projected to stay around 3% through much of 2027.",
+     "driver": "Vaughan supply",
+     "assumption": "Vaughan units under construction stay near 3,100 to 3,500 rather than returning to the 9,815 peak",
      "cite": [
-      "web:1"
-     ]
-    },
-    {
-     "driver": "Vaughan housing starts",
-     "assumption": "Starts over the next 12 months stay near 1,000 to 2,500 homes, not back to the 2021 level of 5,564.",
-     "cite": [
-      "data:vaughan_supply",
-      "data:baseline"
-     ]
-    },
-    {
-     "driver": "Rents",
-     "assumption": "Average rent in the Vaughan zone stays below $1,800 a month in the next survey.",
-     "cite": [
-      "data:rental",
-      "web:7"
+      "data:vaughan_supply"
      ]
     }
    ],
    "drivers": [
     {
-     "text": "Higher-for-longer interest rates keep buyers cautious.",
+     "text": "Resale prices in Vaughan are down about 5% from a year ago.",
      "direction": "slows growth",
      "cite": [
-      "web:1",
-      "data:rates"
-     ]
-    },
-    {
-     "text": "A large pipeline of proposals (89 active applications) keeps the long-term plan alive.",
-     "direction": "helps growth",
-     "cite": [
-      "data:devapps"
+      "data:resale"
      ]
     }
    ]
@@ -336,44 +276,36 @@
    "name": "pessimistic",
    "likelihood": "possible",
    "horizon": "next 12-24 months",
-   "summary": "Weak jobs and more rate hikes push prices lower and delay more projects.",
+   "summary": "More rate hikes and weak buyer demand push prices lower and delay new projects.",
    "assumptions": [
     {
      "driver": "Bank of Canada policy rate",
-     "assumption": "Rises above 2.5% in 2027 because inflation stays high.",
+     "assumption": "Rises above 3.0% by the end of 2027",
      "cite": [
       "web:1"
      ]
     },
     {
-     "driver": "Jobs",
-     "assumption": "Ontario unemployment stays at or above 7.3%.",
+     "driver": "Condo inventory",
+     "assumption": "Unsold finished condos in the GTHA stay above 5,000 units",
      "cite": [
-      "web:6"
-     ]
-    },
-    {
-     "driver": "Condo market",
-     "assumption": "Developers keep holding record unsold finished condos (5,001 units in the GTHA in Q2) and pre-construction sales stay near 50 units a quarter.",
-     "cite": [
-      "web:5"
+      "web:4"
      ]
     }
    ],
    "drivers": [
     {
-     "text": "Weak jobs and a higher policy rate hurt buyers.",
+     "text": "The Bank said more rate increases could be needed.",
      "direction": "slows growth",
      "cite": [
-      "web:6",
       "web:1"
      ]
     },
     {
-     "text": "Under-construction units already fell to 3,144 from 3,588 a year ago.",
+     "text": "A record stock of finished, unsold condos weighs on new launches.",
      "direction": "slows growth",
      "cite": [
-      "data:vaughan_supply"
+      "web:4"
      ]
     }
    ]
@@ -384,11 +316,11 @@
    "series_id": "hpi_composite_h6",
    "view": "in line with baseline",
    "expected_low": 1030000,
-   "expected_high": 1140000,
-   "reason": "Prices are falling about 5% a year, and the Bank of Canada raised its rate on October 28. The baseline already allows for this.",
+   "expected_high": 1150000,
+   "reason": "Prices are drifting down and the rate hike is a modest headwind, which fits the baseline trend.",
    "cite": [
-    "data:resale",
     "data:baseline",
+    "data:resale",
     "web:1"
    ]
   },
@@ -396,12 +328,11 @@
    "series_id": "hpi_composite_h12",
    "view": "in line with baseline",
    "expected_low": 960000,
-   "expected_high": 1170000,
-   "reason": "No strong evidence to depart from the baseline. Weak jobs and higher rates push down; cheaper development charges and a thinning pipeline push up later.",
+   "expected_high": 1180000,
+   "reason": "No cited evidence supports a break from the damped trend; a further rate hike adds downside risk.",
    "cite": [
     "data:baseline",
-    "web:6",
-    "web:4"
+    "web:1"
    ]
   },
   {
@@ -409,23 +340,21 @@
    "view": "in line with baseline",
    "expected_low": 470000,
    "expected_high": 545000,
-   "reason": "Condo prices are falling about 6.5% a year with record unsold finished condos around the GTA, but sellers are not cutting faster. In line with the baseline.",
+   "reason": "Condo prices fell 6.51% in a year, and the baseline of no change is a reasonable midpoint.",
    "cite": [
-    "data:resale",
     "data:baseline",
-    "web:5"
+    "data:resale"
    ]
   },
   {
    "series_id": "hpi_apartment_h12",
    "view": "in line with baseline",
    "expected_low": 420000,
-   "expected_high": 545000,
-   "reason": "The baseline expects a mild decline. Evidence is mixed: a thinning pipeline helps later, weak presales and jobs hurt now.",
+   "expected_high": 540000,
+   "reason": "Record unsold condo inventory points to soft prices, in line with the baseline's slight decline.",
    "cite": [
     "data:baseline",
-    "web:5",
-    "web:6"
+    "web:4"
    ]
   },
   {
@@ -433,84 +362,103 @@
    "view": "in line with baseline",
    "expected_low": 900,
    "expected_high": 2800,
-   "reason": "Starts are low (1,243 so far in 2026) and presales are very weak. Development charge cuts may help later, so the baseline is reasonable.",
+   "reason": "Starts are lumpy; 1,243 units were started in 2026 through September.",
    "cite": [
-    "data:vaughan_supply",
-    "web:5",
-    "web:4"
+    "data:baseline",
+    "data:vaughan_supply"
    ]
   },
   {
    "series_id": "starts_apartment_next12",
    "view": "in line with baseline",
-   "expected_low": 700,
-   "expected_high": 2600,
-   "reason": "Apartment starts follow condo presales, which are very weak. The baseline range is very wide because past errors were large.",
+   "expected_low": 600,
+   "expected_high": 3500,
+   "reason": "Apartment starts swing a lot year to year, and no cited evidence says otherwise.",
    "cite": [
     "data:baseline",
-    "web:5"
+    "data:vaughan_supply"
    ]
   },
   {
    "series_id": "under_construction_h12",
    "view": "in line with baseline",
-   "expected_low": 2400,
-   "expected_high": 4000,
-   "reason": "Completions are outpacing starts, so the number under construction is drifting down (3,144 vs 3,588 a year ago).",
+   "expected_low": 2500,
+   "expected_high": 3800,
+   "reason": "Units under construction fell from 3,588 to 3,144 in a year as completions outpaced starts.",
    "cite": [
-    "data:vaughan_supply",
-    "data:baseline"
+    "data:baseline",
+    "data:vaughan_supply"
    ]
   },
   {
    "series_id": "rent_zone_h1",
    "view": "in line with baseline",
    "expected_low": 1690,
-   "expected_high": 1790,
-   "reason": "CMHC says rental conditions are expected to continue easing, after average rent fell in 2025. Slowing completions could add pressure later.",
+   "expected_high": 1800,
+   "reason": "Zone rents slipped in 2025 and vacancy is 2.4%, so a large rise looks unlikely.",
    "cite": [
-    "data:rental",
-    "web:7"
+    "data:baseline",
+    "data:rental"
    ]
   }
  ],
  "events": [
   {
-   "date": "2026-03-30",
-   "level": "provincial",
-   "title": "Ontario and Ottawa announce $8.8 billion to cut development charges",
-   "impact": "The announced deal aims to cut development charges in half for three years. Whether Vaughan takes part is not confirmed in the sources reviewed. Lower fees could help new towers pay off.",
-   "direction": "helps growth",
-   "cite": [
-    "web:4"
-   ]
-  },
-  {
-   "date": "2026-07-20",
-   "level": "regional",
-   "title": "Urbanation: GTHA new condo sales rise for the first time in three years",
-   "impact": "Sales were 702 units in Q2, but included some large bulk sales to investment groups. Pre-construction sales fell 80% to 50 units, so new towers still struggle to launch.",
-   "direction": "mixed",
-   "cite": [
-    "web:5"
-   ]
-  },
-  {
    "date": "2026-10-28",
    "level": "national",
    "title": "Bank of Canada raises its rate to 2.5%",
-   "impact": "The bank raised its policy rate by 0.25 points. It said inflation has been higher than anticipated and is projected to stay around 3% through much of 2027. That keeps mortgage costs from falling.",
+   "impact": "Higher rates make mortgages more costly. The Bank said more increases could be needed.",
    "direction": "slows growth",
    "cite": [
     "web:1"
    ]
   },
   {
-   "date": "2026-11-06",
+   "date": "2026-12-09",
+   "level": "national",
+   "title": "Next Bank of Canada rate decision",
+   "impact": "The next scheduled rate announcement. Another hike would add to borrowing costs.",
+   "direction": "mixed",
+   "cite": [
+    "web:1"
+   ]
+  },
+  {
+   "date": "2026-05-21",
+   "level": "regional",
+   "title": "York Region's new development charges bylaw takes effect",
+   "impact": "Region-wide residential charges drop 2% to 9%, which can lower building costs.",
+   "direction": "helps growth",
+   "cite": [
+    "web:3"
+   ]
+  },
+  {
+   "date": "2026-07-20",
+   "level": "regional",
+   "title": "GTHA new condo sales rebound from 35-year low",
+   "impact": "Sales rose 52% to 702 units in Q2 2026, but developers hold a record 5,001 finished unsold units.",
+   "direction": "mixed",
+   "cite": [
+    "web:4"
+   ]
+  },
+  {
+   "date": "2026-04",
    "level": "provincial",
-   "title": "Ontario unemployment rises to 7.3%",
-   "impact": "Employment was little changed for a third month. Weak jobs can reduce buyer confidence.",
-   "direction": "slows growth",
+   "title": "Ontario expands HST relief on new homes",
+   "impact": "Eligible buyers could save up to $130,000 on new homes for one year, which can help new condo sales.",
+   "direction": "helps growth",
+   "cite": [
+    "web:5"
+   ]
+  },
+  {
+   "date": "2026-03-30",
+   "level": "provincial",
+   "title": "Development Charge Reduction Program",
+   "impact": "Municipalities need to cut development charges by 30% to 50% or more for 3 years as part of an $8.8 billion partnership.",
+   "direction": "helps growth",
    "cite": [
     "web:6"
    ]
@@ -518,57 +466,42 @@
  ],
  "watch_list": [
   {
-   "signal": "Bank of Canada decision",
-   "threshold": "Next decision is December 9, 2026. A second hike would be a negative sign; a pause would mean steady costs.",
-   "why": "Mortgage rates drive what buyers can afford.",
+   "signal": "Bank of Canada rate",
+   "threshold": "Another hike on Dec. 9 or any move above 2.5%",
+   "why": "Higher rates raise mortgage costs and weigh on buyers.",
    "cite": [
-    "web:11"
+    "web:1",
+    "data:rates"
    ]
   },
   {
-   "signal": "Vaughan benchmark condo price",
-   "threshold": "Year-over-year change moving from -6.5% toward 0%",
-   "why": "It would show the price slide is ending.",
-   "cite": [
-    "data:resale"
-   ]
-  },
-  {
-   "signal": "Months of inventory in Vaughan",
-   "threshold": "Above 6 months means buyers have the upper hand; below 4 means sellers do.",
-   "why": "It shows how balanced the resale market is (4.8 in October).",
-   "cite": [
-    "data:resale"
-   ]
-  },
-  {
-   "signal": "Units under construction in Vaughan",
-   "threshold": "Falling below 3,000 from 3,144",
-   "why": "It shows whether new supply is thinning faster.",
+   "signal": "Vaughan units under construction",
+   "threshold": "Below 3,000 or back above 3,588",
+   "why": "Shows whether builders are starting more towers than they finish.",
    "cite": [
     "data:vaughan_supply"
    ]
   },
   {
-   "signal": "GTHA pre-construction condo sales",
-   "threshold": "Moving well above 50 units a quarter",
-   "why": "New towers need presales to launch.",
+   "signal": "Vaughan months of resale inventory",
+   "threshold": "Above 6 months",
+   "why": "More supply than buyers usually pushes prices down.",
    "cite": [
-    "web:5"
+    "data:resale"
    ]
   },
   {
-   "signal": "Ontario unemployment rate",
-   "threshold": "Staying at or above 7.3%, or falling under 7%",
-   "why": "Jobs drive housing demand.",
+   "signal": "Unsold finished GTHA condos",
+   "threshold": "Above 5,001 units",
+   "why": "A growing stock of unsold condos weighs on new launches.",
    "cite": [
-    "web:6"
+    "web:4"
    ]
   },
   {
-   "signal": "VMC development applications",
-   "threshold": "Any new applications after none in 180 days",
-   "why": "New filings show developers' appetite.",
+   "signal": "Active VMC applications",
+   "threshold": "Below 89 or a jump in approvals",
+   "why": "Shows whether the planning pipeline is growing or shrinking.",
    "cite": [
     "data:devapps"
    ]
@@ -576,161 +509,120 @@
  ],
  "evidence": [
   {
-   "source": "web:5",
-   "quote": "pre-construction and under-construction inventory falling to 48,710 units in Q2 — down 37% from a year earlier",
-   "used_for": [
-    "status[0]"
-   ]
-  },
-  {
-   "source": "web:6",
-   "quote": "The unemployment rate rose 0.3 percentage points to 7.3% in the month, as more people searched for work.",
-   "used_for": [
-    "status[1]",
-    "personas[2].points[1]",
-    "scenarios[0].assumptions[2]",
-    "scenarios[2].assumptions[1]",
-    "scenarios[2].drivers[0]",
-    "baseline_views[1]",
-    "baseline_views[3]",
-    "events[4]",
-    "watch_list[5]"
-   ]
-  },
-  {
-   "source": "web:6",
-   "quote": "In Ontario, employment was little changed for a third consecutive month in October.",
-   "used_for": [
-    "status[1]",
-    "personas[2].points[1]",
-    "events[4]"
-   ]
-  },
-  {
-   "source": "web:5",
-   "quote": "Pre-construction sales moved in the opposite direction, dropping 80% annually to just 50 units.",
-   "used_for": [
-    "status[4]",
-    "personas[4].points[1]",
-    "events[2]",
-    "scenarios[2].assumptions[2]",
-    "baseline_views[2]",
-    "baseline_views[3]",
-    "baseline_views[4]",
-    "baseline_views[5]",
-    "watch_list[4]"
-   ]
-  },
-  {
-   "source": "web:5",
-   "quote": "rose from 4,826 units in Q1 to a record-high 5,001 units in Q2",
-   "used_for": [
-    "personas[0].points[3]",
-    "personas[3].points[3]",
-    "scenarios[2].assumptions[2]",
-    "baseline_views[2]"
-   ]
-  },
-  {
-   "source": "web:5",
-   "quote": "prices were generally well below asking",
-   "used_for": [
-    "personas[0].points[3]"
-   ]
-  },
-  {
-   "source": "web:5",
-   "quote": "which included some large bulk sales to investment groups",
-   "used_for": [
-    "personas[4].points[1]",
-    "events[2]"
-   ]
-  },
-  {
-   "source": "web:7",
-   "quote": "Conditions are expected to continue easing as new units take longer to be absorbed",
-   "used_for": [
-    "status[3]",
-    "personas[1].points[1]",
-    "scenarios[1].assumptions[2]",
-    "baseline_views[7]"
-   ]
-  },
-  {
-   "source": "web:8",
-   "quote": "slowing condominium completions will reduce an important source of secondary rental supply in coming years.",
-   "used_for": [
-    "personas[1].points[1]"
-   ]
-  },
-  {
    "source": "web:1",
-   "quote": "Bank of Canada raises the policy rate by 25 basis points to 2½%",
+   "quote": "The Bank of Canada today increased its target for the overnight rate by 25 basis points to 2.5%",
    "used_for": [
-    "personas[0].points[1]",
-    "personas[2].points[2]",
-    "personas[4].points[2]",
+    "headline",
+    "status[4]",
+    "personas[0].points[2]",
     "scenarios[0].assumptions[0]",
-    "scenarios[1].drivers[0]",
     "scenarios[2].assumptions[0]",
     "scenarios[2].drivers[0]",
+    "events[0]",
+    "watch_list[0]",
     "baseline_views[0]",
-    "events[3]"
+    "baseline_views[1]"
    ]
   },
   {
    "source": "web:1",
-   "quote": "Inflation in Canada has been higher than anticipated and is projected to remain around 3% through much of 2027.",
+   "quote": "There could be a need to increase the policy rate further",
    "used_for": [
-    "scenarios[1].assumptions[0]",
-    "personas[2].points[2]",
-    "events[3]"
-   ]
-  },
-  {
-   "source": "web:4",
-   "quote": "Ontario development charges to be cut in half for 3 years",
-   "used_for": [
-    "scenarios[0].assumptions[1]",
-    "scenarios[0].drivers[0]",
-    "events[0]",
-    "baseline_views[1]",
-    "baseline_views[4]"
-   ]
-  },
-  {
-   "source": "web:4",
-   "quote": "Feds, Ontario invest $8.8 B to cut development charges in half",
-   "used_for": [
+    "personas[0].points[2]",
+    "scenarios[2].drivers[0]",
     "events[0]"
    ]
   },
   {
-   "source": "web:11",
-   "quote": "December 9, 2026 Interest Rate Announcement 09:45 (ET)",
+   "source": "web:1",
+   "quote": "The next scheduled date for announcing the overnight rate target is December 9, 2026.",
    "used_for": [
+    "events[1]",
     "watch_list[0]"
+   ]
+  },
+  {
+   "source": "web:3",
+   "quote": "Region-wide DC rates decrease between 2% and 9% for residential development",
+   "used_for": [
+    "events[3]",
+    "scenarios[0].drivers[0]"
+   ]
+  },
+  {
+   "source": "web:3",
+   "quote": "The updated 2026 Region-wide Bylaw and Nobleton Bylaw was in effect as of Thursday, May 21, 2026.",
+   "used_for": [
+    "events[3]"
+   ]
+  },
+  {
+   "source": "web:4",
+   "quote": "increased 52% annually to 702 units in Q2-2026",
+   "used_for": [
+    "status[1]",
+    "scenarios[0].drivers[1]",
+    "events[4]"
+   ]
+  },
+  {
+   "source": "web:4",
+   "quote": "a record-high 5,001 units in Q2",
+   "used_for": [
+    "personas[3].points[2]",
+    "scenarios[2].assumptions[1]",
+    "scenarios[2].drivers[1]",
+    "events[4]",
+    "watch_list[3]",
+    "baseline_views[3]"
+   ]
+  },
+  {
+   "source": "web:5",
+   "quote": "could save eligible buyers, including first-time home buyers, up to $130,000",
+   "used_for": [
+    "status[4]",
+    "personas[0].points[1]",
+    "events[5]"
+   ]
+  },
+  {
+   "source": "web:5",
+   "quote": "expands the HST New Housing Rebate and New Residential Rental Property Rebate for one year",
+   "used_for": [
+    "scenarios[0].assumptions[1]",
+    "events[5]"
+   ]
+  },
+  {
+   "source": "web:6",
+   "quote": "Through the program, municipalities will need to reduce DCs by 30% to 50% or more for 3 years.",
+   "used_for": [
+    "events[6]",
+    "scenarios[0].drivers[0]"
+   ]
+  },
+  {
+   "source": "web:6",
+   "quote": "The DCRP is part of the $8.8 billion Canada-Ontario Partnership to Build",
+   "used_for": [
+    "events[6]"
    ]
   }
  ],
  "verification": {
-  "web_citations_checked": 46,
-  "verified": 42,
-  "removed": 4
+  "web_citations_checked": 34,
+  "verified": 27,
+  "removed": 7
  },
- "generated": "2026-11-07T20:58+00:00",
+ "generated": "2026-11-09T13:14+00:00",
  "model": "Claude Sonnet 5.5 (scheduled routine)",
- "dropped_uncited_items": 3,
+ "dropped_uncited_items": 7,
  "sources": {
   "data:devapps": {
    "kind": "data",
    "title": "Active VMC development applications (York Region)",
    "url": "https://shashemi23.github.io/vmc-growth-tracker/development"
-  },
-  "data:tract": {
-   "kind": "data",
-   "title": "CMHC starts and completions, VMC census tract 0411.08",
-   "url": "https://shashemi23.github.io/vmc-growth-tracker/housing"
   },
   "data:vaughan_supply": {
    "kind": "data",
@@ -759,45 +651,33 @@
   },
   "web:1": {
    "kind": "web",
-   "title": "Bank of Canada interest rate announcement and Monetary Policy Report (Oct 28, 2026)",
-   "url": "https://www.bankofcanada.ca/2026/10/fad-announcement-release-mpr-2026-10-28/",
+   "title": "Bank of Canada raises the policy rate by 25 basis points to 2½%",
+   "url": "https://www.bankofcanada.ca/2026/10/fad-press-release-2026-10-28/",
    "page_age": "2026-10-28"
+  },
+  "web:3": {
+   "kind": "web",
+   "title": "York Region 2026 Development Charges Bylaw update",
+   "url": "https://www.york.ca/newsroom/media-release/york-region-addresses-housing-affordability-2026-development-charges-bylaw",
+   "page_age": "2026-05-26"
   },
   "web:4": {
    "kind": "web",
-   "title": "Ontario development charges to be cut in half for 3 years (CTV News)",
-   "url": "https://www.ctvnews.ca/toronto/politics/queens-park/article/development-charges-to-be-cut-in-half-for-three-years-through-88-billion-investment-by-ontario-and-federal-governments/",
-   "page_age": "2026-03-30"
-  },
-  "web:5": {
-   "kind": "web",
-   "title": "GTHA new condo sales increase over 50% in Q2 (Urbanation)",
+   "title": "GTHA New Condo Sales Increase Over 50% in Q2",
    "url": "https://www.urbanation.ca/news/gtha-new-condo-sales-increase-over-50-q2",
    "page_age": "2026-07-20"
   },
+  "web:5": {
+   "kind": "web",
+   "title": "Housing in Ontario",
+   "url": "https://www.ontario.ca/page/housing-in-ontario",
+   "page_age": "2026-10-28"
+  },
   "web:6": {
    "kind": "web",
-   "title": "The Daily - Labour Force Survey, October 2026 (Statistics Canada)",
-   "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/261106/dq261106a-eng.htm",
-   "page_age": "2026-11-06"
-  },
-  "web:7": {
-   "kind": "web",
-   "title": "2026 Mid-Year Rental Market Update (CMHC)",
-   "url": "https://www.cmhc-schl.gc.ca/observer/2026/2026-mid-year-rental-market-update",
+   "title": "Development Charges Reduction Program",
+   "url": "https://www.ontario.ca/page/development-charges-reduction-program",
    "page_age": "2026"
-  },
-  "web:8": {
-   "kind": "web",
-   "title": "Fall 2026 Housing Supply Report (CMHC)",
-   "url": "https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/market-reports/housing-market/housing-supply-report",
-   "page_age": "2026-fall"
-  },
-  "web:11": {
-   "kind": "web",
-   "title": "Upcoming events (Bank of Canada): Interest Rate Announcement, December 9, 2026",
-   "url": "https://www.bankofcanada.ca/press/upcoming-events/",
-   "page_age": "2026-11-07"
   }
  }
 }

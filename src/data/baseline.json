@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-07",
+ "generated": "2026-11-09",
  "series": [
   {
    "id": "hpi_composite_h6",
@@ -11,17 +11,17 @@
    "current": 1106600.0,
    "method": "damped trend",
    "forecast": 1087732.3,
-   "low": 985218.1,
-   "high": 1196610.0,
+   "low": 984234.6,
+   "high": 1194247.9,
    "interval": 0.8,
    "backtest": {
     "no change": {
-     "n": 134,
-     "typical_error_pct": 6.7
+     "n": 136,
+     "typical_error_pct": 6.8
     },
     "damped trend": {
-     "n": 121,
-     "typical_error_pct": 5.8
+     "n": 124,
+     "typical_error_pct": 5.9
     }
    }
   },
@@ -35,16 +35,16 @@
    "current": 1106600.0,
    "method": "damped trend",
    "forecast": 1077836.4,
-   "low": 932087.1,
-   "high": 1229832.7,
+   "low": 926505.7,
+   "high": 1231707.8,
    "interval": 0.8,
    "backtest": {
     "no change": {
-     "n": 128,
-     "typical_error_pct": 10.9
+     "n": 130,
+     "typical_error_pct": 11.0
     },
     "damped trend": {
-     "n": 115,
+     "n": 118,
      "typical_error_pct": 10.2
     }
    }
@@ -59,17 +59,17 @@
    "current": 504900.0,
    "method": "no change",
    "forecast": 504900.0,
-   "low": 468496.8,
-   "high": 561467.9,
+   "low": 467075.4,
+   "high": 562529.2,
    "interval": 0.8,
    "backtest": {
     "no change": {
-     "n": 134,
+     "n": 136,
      "typical_error_pct": 6.3
     },
     "damped trend": {
-     "n": 121,
-     "typical_error_pct": 6.5
+     "n": 124,
+     "typical_error_pct": 6.6
     }
    }
   },
@@ -83,17 +83,17 @@
    "current": 504900.0,
    "method": "damped trend",
    "forecast": 484889.8,
-   "low": 399392.0,
-   "high": 559202.2,
+   "low": 398566.5,
+   "high": 560593.7,
    "interval": 0.8,
    "backtest": {
     "no change": {
-     "n": 128,
-     "typical_error_pct": 10.6
+     "n": 130,
+     "typical_error_pct": 10.7
     },
     "damped trend": {
-     "n": 115,
-     "typical_error_pct": 10.1
+     "n": 118,
+     "typical_error_pct": 10.3
     }
    }
   },

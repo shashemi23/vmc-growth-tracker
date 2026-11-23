@@ -1322,3 +1322,6 @@ date,series,Single,Semi-Detached,Row,Apartment,All
 2026-09-01,completions,14,0,0,519,533
 2026-09-01,starts,15,0,31,0,46
 2026-09-01,under_construction,252,2,225,2665,3144
+2026-10-01,completions,3,0,13,766,782
+2026-10-01,starts,6,6,105,0,117
+2026-10-01,under_construction,255,8,317,1899,2479

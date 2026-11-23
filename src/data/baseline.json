@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-16",
+ "generated": "2026-11-23",
  "series": [
   {
    "id": "hpi_composite_h6",
@@ -102,21 +102,21 @@
    "label": "Vaughan housing starts, all types: total over the next 12 months",
    "unit": "units",
    "source_note": "CMHC Starts and Completions Survey",
-   "origin": "2026-09-01",
-   "target": "2027-09-01",
-   "current": 1652.0,
+   "origin": "2026-10-01",
+   "target": "2027-10-01",
+   "current": 1382.0,
    "method": "no change",
-   "forecast": 1652.0,
-   "low": 806.2,
-   "high": 3779.1,
+   "forecast": 1382.0,
+   "low": 678.4,
+   "high": 3158.9,
    "interval": 0.8,
    "backtest": {
     "no change": {
-     "n": 249,
-     "typical_error_pct": 56.1
+     "n": 250,
+     "typical_error_pct": 56.0
     },
     "damped trend": {
-     "n": 249,
+     "n": 250,
      "typical_error_pct": 97.5
     }
    }
@@ -126,22 +126,22 @@
    "label": "Vaughan apartment starts: total over the next 12 months",
    "unit": "units",
    "source_note": "CMHC Starts and Completions Survey",
-   "origin": "2026-09-01",
-   "target": "2027-09-01",
-   "current": 1508.0,
+   "origin": "2026-10-01",
+   "target": "2027-10-01",
+   "current": 1128.0,
    "method": "no change",
-   "forecast": 1508.0,
-   "low": 442.1,
-   "high": 5750.5,
+   "forecast": 1128.0,
+   "low": 331.9,
+   "high": 4301.4,
    "interval": 0.8,
    "backtest": {
     "no change": {
-     "n": 241,
-     "typical_error_pct": 166.3
+     "n": 242,
+     "typical_error_pct": 165.8
     },
     "damped trend": {
-     "n": 239,
-     "typical_error_pct": 394.4
+     "n": 240,
+     "typical_error_pct": 393.1
     }
    }
   },
@@ -150,22 +150,22 @@
    "label": "Vaughan units under construction in 12 months",
    "unit": "units",
    "source_note": "CMHC Starts and Completions Survey",
-   "origin": "2026-09-01",
-   "target": "2027-09-01",
-   "current": 3144.0,
+   "origin": "2026-10-01",
+   "target": "2027-10-01",
+   "current": 2479.0,
    "method": "no change",
-   "forecast": 3144.0,
-   "low": 2156.6,
-   "high": 5273.5,
+   "forecast": 2479.0,
+   "low": 1687.2,
+   "high": 4157.6,
    "interval": 0.8,
    "backtest": {
     "no change": {
-     "n": 249,
+     "n": 250,
      "typical_error_pct": 29.9
     },
     "damped trend": {
-     "n": 249,
-     "typical_error_pct": 37.2
+     "n": 250,
+     "typical_error_pct": 37.1
     }
    }
   },
